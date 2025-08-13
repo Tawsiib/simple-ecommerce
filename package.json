@@ -1,0 +1,36 @@
+{
+  "name": "shohanis-reflection",
+  "version": "1.0.0",
+  "description": "Shohanis Reflection Beauty & Skincare E-commerce Platform",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && php artisan serve",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && composer install",
+    "setup": "npm run install:all && cd backend && cp .env.example .env && php artisan key:generate",
+    "migrate": "cd backend && php artisan migrate",
+    "seed": "cd backend && php artisan db:seed",
+    "test": "cd frontend && npm test && cd ../backend && php artisan test",
+    "lint": "cd frontend && npm run lint",
+    "format": "cd frontend && npm run format"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "ecommerce",
+    "beauty",
+    "skincare",
+    "nextjs",
+    "laravel",
+    "tailwindcss"
+  ],
+  "author": "Shohanis Reflection",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/shohanis-reflection.git"
+  }
+}
