@@ -3,19 +3,23 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
-  Bars3Icon, 
-  XMarkIcon, 
   ShoppingBagIcon, 
   HeartIcon,
   UserIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
+  TruckIcon,
+  QuestionMarkCircleIcon,
+  SunIcon,
+  SparklesIcon,
+  FireIcon,
+  TagIcon
 } from '@heroicons/react/24/outline';
 import { 
   ChevronDownIcon,
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon
 } from '@heroicons/react/24/outline';
-import MobileNavigation from './MobileNavigation';
+import BottomNavigation from './BottomNavigation';
 import CartDrawer from './cart/CartDrawer';
 import { CompactSearchBar } from './SearchBar';
 import useAuthStore from '../lib/stores/authStore';
@@ -23,11 +27,9 @@ import useCartStore from '../lib/stores/cartStore';
 import useWishlistStore from '../lib/stores/wishlistStore';
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const { user, isAuthenticated, logout } = useAuthStore();
@@ -57,18 +59,6 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Handle search expansion on mobile
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsSearchExpanded(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const handleLogout = async () => {
     try {
       await logout();
@@ -80,242 +70,287 @@ const Header = () => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    setIsSearchExpanded(false);
   };
 
   const cartItemsCount = summary?.itemsCount || 0;
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl shadow-large border-b border-white/20' 
-          : 'bg-white/90 backdrop-blur-md'
-      }`}>
-        <div className="container-custom">
-          {/* Main Header Row */}
-          <div className="flex items-center justify-between h-18 lg:h-24">
-            {/* Logo */}
-            <div className="flex items-center flex-shrink-0 mr-8 lg:mr-12">
-              <Link href="/" className="flex items-center space-x-2 lg:space-x-3 group">
+      {/* Sticky Header Container - All headers move together */}
+      <div className="fixed top-0 left-0 right-0 z-40">
+        {/* Promotional Banner */}
+        <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white text-sm py-2 px-4">
+          <div className="container-custom flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <TruckIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">Free shipping on orders over ৳1000</span>
+                <span className="sm:hidden">Free shipping over ৳1000</span>
+              </div>
+              <div className="hidden sm:flex items-center space-x-2">
+                <span>•</span>
+                <div className="flex items-center space-x-1">
+                  <QuestionMarkCircleIcon className="w-4 h-4" />
+                  <span>Track Order</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center space-x-1">
+                  <SunIcon className="w-4 h-4" />
+                  <span>Help</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              {!isAuthenticated ? (
+                <div className="flex items-center space-x-3">
+                  <Link href="/login" className="text-white/90 hover:text-white transition-colors text-sm">
+                    Login
+                  </Link>
+                  <span className="text-white/50">|</span>
+                  <Link href="/register" className="text-white/90 hover:text-white transition-colors text-sm">
+                    Register
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2">
+                  <span className="text-white/90 text-sm">Welcome, {user?.name || 'User'}</span>
+                </div>
+              )}
+              <button className="p-1.5 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
+                <SunIcon className="w-4 h-4 text-white" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Header */}
+        <header className={`bg-white/95 backdrop-blur-md border-b border-gray-200/50 transition-all duration-300 ${
+          isScrolled ? 'shadow-lg' : 'shadow-sm'
+        }`}>
+          <div className="container-custom py-4">
+            <div className="flex items-center justify-between">
+              {/* Logo */}
+              <Link href="/" className="flex items-center space-x-3 group">
                 <div className="relative">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 rounded-xl flex items-center justify-center shadow-glow group-hover:shadow-glow-accent transition-all duration-300">
-                    <span className="text-white font-bold text-lg lg:text-xl">SR</span>
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-xl flex items-center justify-center shadow-glow group-hover:shadow-glow-accent transition-all duration-300">
+                    <span className="text-white font-bold text-xl">SR</span>
                   </div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                 </div>
-                <span className="hidden sm:block text-lg lg:text-2xl font-bold text-gradient-primary group-hover:text-gradient-accent transition-all duration-300">
-                  Shohanis Reflection
-                </span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8 xl:space-x-10">
-              <Link 
-                href="/" 
-                className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-300 relative group"
-              >
-                Home
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
-              <Link 
-                href="/products" 
-                className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-300 relative group"
-              >
-                Products
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
-              <Link 
-                href="/categories" 
-                className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-300 relative group"
-              >
-                Categories
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
-              <Link 
-                href="/brands" 
-                className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-300 relative group"
-              >
-                Brands
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
-              <Link 
-                href="/about" 
-                className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-300 relative group"
-              >
-                About
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
-              <Link 
-                href="/contact" 
-                className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-300 relative group"
-              >
-                Contact
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
-            </nav>
-
-            {/* Search Bar - Enhanced with responsive behavior */}
-            <div className={`flex-1 max-w-xl lg:max-w-2xl mx-6 lg:mx-8 transition-all duration-300 ${
-              isSearchExpanded ? 'block' : 'hidden md:block'
-            }`}>
-              <CompactSearchBar 
-                onSearch={handleSearch}
-                className="w-full"
-                placeholder="Search products..."
-              />
-            </div>
-
-            {/* Right Side Actions */}
-            <div className="flex items-center space-x-3 lg:space-x-6">
-              {/* Mobile Search Toggle */}
-              <button
-                onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-                className="md:hidden p-2 text-gray-700 hover:text-primary-600 transition-colors"
-                aria-label="Toggle search"
-              >
-                <MagnifyingGlassIcon className="h-5 w-5" />
-              </button>
-
-              {/* Wishlist */}
-              <Link 
-                href="/wishlist"
-                className="relative p-2.5 lg:p-3 text-gray-700 hover:text-primary-600 transition-all duration-300 group"
-              >
-                <div className="w-5 h-5 lg:w-6 lg:h-6 group-hover:scale-110 transition-transform duration-300">
-                  <HeartIcon className="h-full w-full" />
+                <div className="hidden sm:block">
+                  <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent">
+                    Shohanis Reflection
+                  </h1>
+                  <p className="text-xs text-gray-500">Premium Beauty & Skincare</p>
                 </div>
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-primary-500 to-accent-500 text-white text-xs rounded-full h-4 w-4 lg:h-5 lg:w-5 flex items-center justify-center font-semibold shadow-glow">
-                    {wishlistCount > 99 ? '99+' : wishlistCount}
-                  </span>
-                )}
               </Link>
 
-              {/* Cart */}
-              <button
-                onClick={() => setIsCartOpen(true)}
-                className="relative p-2.5 lg:p-3 text-gray-700 hover:text-primary-600 transition-all duration-300 group"
-              >
-                <div className="w-5 h-5 lg:w-6 lg:h-6 group-hover:scale-110 transition-transform duration-300">
-                  <ShoppingBagIcon className="h-full w-full" />
-                </div>
-                {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-primary-500 to-accent-500 text-white text-xs rounded-full h-4 w-4 lg:h-5 lg:w-5 flex items-center justify-center font-semibold shadow-glow">
-                    {cartItemsCount > 99 ? '99+' : cartItemsCount}
-                  </span>
-                )}
-              </button>
+              {/* Search Bar - Hidden on mobile, shown on tablet and up */}
+              <div className="hidden md:flex flex-1 max-w-2xl mx-8">
+                <CompactSearchBar 
+                  onSearch={handleSearch}
+                  placeholder="Search for products, brands, categories..."
+                />
+              </div>
 
-              {/* User Menu */}
-              {isAuthenticated ? (
-                <div className="relative user-menu" ref={userMenuRef}>
+              {/* Right Side Actions */}
+              <div className="flex items-center space-x-4">
+                {/* Wishlist - Hidden on mobile since it's in bottom nav */}
+                <Link href="/wishlist" className="hidden md:flex relative p-2 text-gray-600 hover:text-purple-600 transition-colors group">
+                  <HeartIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-glow">
+                      {wishlistCount > 99 ? '99+' : wishlistCount}
+                    </span>
+                  )}
+                </Link>
+
+                {/* User Menu - Hidden on mobile since it's in bottom nav */}
+                <div className="hidden md:block relative" ref={userMenuRef}>
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center space-x-2 p-2.5 lg:p-3 text-gray-700 hover:text-rose-600 transition-colors rounded-lg hover:bg-gray-100"
+                    className="flex items-center space-x-2 p-2 text-gray-600 hover:text-purple-600 transition-colors group"
                   >
-                    <div className="w-7 h-7 lg:w-8 lg:h-8 bg-gradient-to-r from-rose-500 to-pink-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-medium text-sm">
-                        {user?.initials || user?.name?.charAt(0) || 'U'}
-                      </span>
+                    <div className="relative">
+                      <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-glow group-hover:shadow-glow-accent transition-all duration-300">
+                        {isAuthenticated && user?.avatar ? (
+                          <img 
+                            src={user.avatar} 
+                            alt={user.name} 
+                            className="w-8 h-8 rounded-full object-cover"
+                          />
+                        ) : (
+                          <UserIcon className="w-5 h-5 text-white" />
+                        )}
+                      </div>
+                      {isAuthenticated && (
+                        <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+                      )}
                     </div>
-                    <span className="hidden lg:block text-sm font-medium">{user?.name}</span>
-                    <ChevronDownIcon className="hidden lg:block h-4 w-4" />
                   </button>
 
                   {/* User Dropdown Menu */}
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 animate-fade-in-down">
-                      <Link
-                        href="/profile"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        <UserIcon className="h-4 w-4 mr-3" />
-                        Profile
-                      </Link>
-                      <Link
-                        href="/orders"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        <ShoppingBagIcon className="h-4 w-4 mr-3" />
-                        Orders
-                      </Link>
-                      <Link
-                        href="/wishlist"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        <HeartIcon className="h-4 w-4 mr-3" />
-                        Wishlist
-                      </Link>
-                      <Link
-                        href="/settings"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        <Cog6ToothIcon className="h-4 w-4 mr-3" />
-                        Settings
-                      </Link>
-                      <hr className="my-2" />
-                      <button
-                        onClick={handleLogout}
-                        className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                      >
-                        <ArrowRightOnRectangleIcon className="h-4 w-4 mr-3" />
-                        Logout
-                      </button>
+                    <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-glow border border-gray-200/50 backdrop-blur-sm z-50">
+                      <div className="p-4">
+                        {isAuthenticated ? (
+                          <div className="space-y-3">
+                            <div className="flex items-center space-x-3 pb-3 border-b border-gray-200">
+                              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-glow">
+                                {user?.avatar ? (
+                                  <img 
+                                    src={user.avatar} 
+                                    alt={user.name} 
+                                    className="w-12 h-12 rounded-xl object-cover"
+                                  />
+                                ) : (
+                                  <UserIcon className="w-6 h-6 text-white" />
+                                )}
+                              </div>
+                              <div>
+                                <p className="font-semibold text-gray-900">{user?.name || 'User'}</p>
+                                <p className="text-sm text-gray-500">{user?.email || 'user@example.com'}</p>
+                              </div>
+                            </div>
+                            <div className="space-y-1">
+                              <Link href="/account" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700 hover:text-purple-600">
+                                <UserIcon className="w-5 h-5" />
+                                <span>My Account</span>
+                              </Link>
+                              <Link href="/orders" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700 hover:text-purple-600">
+                                <ShoppingBagIcon className="w-5 h-5" />
+                                <span>My Orders</span>
+                              </Link>
+                              <Link href="/wishlist" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700 hover:text-purple-600">
+                                <HeartIcon className="w-5 h-5" />
+                                <span>Wishlist</span>
+                              </Link>
+                              <Link href="/settings" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-700 hover:text-purple-600">
+                                <Cog6ToothIcon className="w-5 h-5" />
+                                <span>Settings</span>
+                              </Link>
+                            </div>
+                            <div className="pt-3 border-t border-gray-200">
+                              <button
+                                onClick={handleLogout}
+                                className="flex items-center space-x-3 w-full p-2 rounded-lg hover:bg-red-50 transition-colors text-red-600 hover:text-red-700"
+                              >
+                                <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                                <span>Sign Out</span>
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="space-y-3">
+                            <p className="text-gray-600 text-center py-2">Welcome! Please sign in to continue.</p>
+                            <div className="space-y-2">
+                              <Link href="/login" className="block w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-center py-2 px-4 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+                                Sign In
+                              </Link>
+                              <Link href="/register" className="block w-full bg-gray-100 text-gray-700 text-center py-2 px-4 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-300">
+                                Create Account
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
-              ) : (
-                <div className="flex items-center space-x-3 lg:space-x-4">
-                  <Link
-                    href="/login"
-                    className="hidden sm:block text-gray-700 hover:text-rose-600 font-medium transition-colors text-sm lg:text-base px-3 py-2 rounded-lg hover:bg-gray-50"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-4 py-2.5 lg:px-5 lg:py-3 rounded-lg font-medium hover:from-rose-600 hover:to-pink-600 transition-all duration-200 transform hover:scale-105 text-sm lg:text-base shadow-soft hover:shadow-medium"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              )}
 
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="lg:hidden p-2.5 text-gray-700 hover:text-rose-600 transition-colors"
-                aria-label="Open mobile menu"
-              >
-                <Bars3Icon className="h-5 w-5" />
-              </button>
+                {/* Cart - Always visible but with mobile-optimized design */}
+                <button
+                  onClick={() => setIsCartOpen(true)}
+                  className="relative p-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-glow hover:shadow-glow-accent"
+                >
+                  <ShoppingBagIcon className="w-6 h-6" />
+                  {cartItemsCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-white text-purple-600 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-glow">
+                      {cartItemsCount > 99 ? '99+' : cartItemsCount}
+                    </span>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
+        </header>
 
-          {/* Mobile Search Bar - Shows below header when expanded */}
-          {isSearchExpanded && (
-            <div className="md:hidden pb-6 pt-2 animate-fade-in-down">
-              <CompactSearchBar 
-                onSearch={handleSearch}
-                className="w-full"
-                placeholder="Search products..."
-              />
-            </div>
-          )}
+        {/* Category Navigation Bar */}
+        <div className="bg-white border-b border-gray-200 shadow-sm">
+          <div className="container-custom">
+            <nav className="flex items-center justify-between py-3 overflow-x-auto">
+              <div className="flex items-center space-x-8 lg:space-x-12">
+                <Link 
+                  href="/products" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <ShoppingBagIcon className="h-4 w-4" />
+                  <span>All Products</span>
+                </Link>
+                <Link 
+                  href="/category/skincare" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"></div>
+                  <span>Skincare</span>
+                </Link>
+                <Link 
+                  href="/category/makeup" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <div className="w-4 h-4 bg-gradient-to-r from-pink-400 to-red-500 rounded-full"></div>
+                  <span>Makeup</span>
+                </Link>
+                <Link 
+                  href="/category/haircare" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
+                  <span>Hair Care</span>
+                </Link>
+                <Link 
+                  href="/category/perfume" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-full"></div>
+                  <span>Perfume</span>
+                </Link>
+                <Link 
+                  href="/category/bodycare" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <div className="w-4 h-4 bg-gradient-to-r from-green-400 to-teal-500 rounded-full"></div>
+                  <span>Body Care</span>
+                </Link>
+                <Link 
+                  href="/offers" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <SparklesIcon className="h-4 w-4" />
+                  <span>Offers</span>
+                </Link>
+                <Link 
+                  href="/new-arrivals" 
+                  className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 whitespace-nowrap group"
+                >
+                  <TagIcon className="h-4 w-4" />
+                  <span>New Arrivals</span>
+                </Link>
+              </div>
+              <Link 
+                href="/flash-sale" 
+                className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-all duration-300 whitespace-nowrap group"
+              >
+                <FireIcon className="h-4 w-4" />
+                <span>Flash Sale</span>
+              </Link>
+            </nav>
+          </div>
         </div>
-      </header>
+      </div>
 
-      {/* Mobile Navigation */}
-      <MobileNavigation 
-        isOpen={isMobileMenuOpen} 
-        onClose={() => setIsMobileMenuOpen(false)} 
-      />
+      {/* Bottom Navigation for Mobile */}
+      <BottomNavigation />
 
       {/* Cart Drawer */}
       <CartDrawer 
@@ -323,10 +358,11 @@ const Header = () => {
         onClose={() => setIsCartOpen(false)} 
       />
 
-      {/* Spacer for fixed header */}
-      <div className={`transition-all duration-300 ${
-        isSearchExpanded ? 'h-40 md:h-18 lg:h-24' : 'h-18 lg:h-24'
-      }`} />
+      {/* Spacer for fixed header - Updated height to account for all three sections */}
+      <div className={`transition-all duration-300 h-44`} />
+      
+      {/* Bottom spacer for mobile bottom navigation */}
+      <div className="h-20 lg:hidden" />
     </>
   );
 };

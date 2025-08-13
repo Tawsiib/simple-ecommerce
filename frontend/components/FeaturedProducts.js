@@ -192,20 +192,20 @@ export default function FeaturedProducts() {
   }
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-primary-50/30 relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-purple-50/30 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ed7516%22%20fill-opacity%3D%220.02%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23a855f7%22%20fill-opacity%3D%220.02%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
       
       {/* Floating Elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-primary-500/10 to-accent-500/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-accent-500/10 to-primary-500/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '1s' }}></div>
       
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-100 to-accent-100 px-4 py-2 rounded-full mb-6 animate-fade-in-up">
-            <SparklesIcon className="w-5 h-5 text-primary-600" />
-            <span className="text-sm font-semibold text-primary-700">Premium Collection</span>
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full mb-6 animate-fade-in-up">
+            <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+            <span className="text-sm font-semibold text-purple-700">Premium Collection</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             Featured Products
@@ -215,13 +215,13 @@ export default function FeaturedProducts() {
           </p>
         </div>
 
-        {/* Filters and Sorting */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/30 shadow-soft p-6 mb-8 sm:mb-12 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        {/* Enhanced Filters and Sorting */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-white/30 shadow-soft p-8 mb-12 sm:mb-16 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             {/* Category Filter */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full lg:w-auto">
               <div className="flex items-center space-x-2">
-                <FunnelIcon className="w-5 h-5 text-primary-600" />
+                <FunnelIcon className="w-5 h-5 text-purple-600" />
                 <span className="text-sm font-semibold text-gray-700">Category:</span>
               </div>
               <div className="flex flex-wrap gap-3 w-full sm:w-auto">
@@ -231,8 +231,8 @@ export default function FeaturedProducts() {
                     onClick={() => setSelectedCategory(category.id)}
                     className={`px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 whitespace-nowrap ${
                       selectedCategory === category.id
-                        ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-glow transform scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-glow transform scale-105'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 hover:shadow-soft'
                     }`}
                   >
                     {category.name}
@@ -244,13 +244,13 @@ export default function FeaturedProducts() {
             {/* Sorting */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full lg:w-auto">
               <div className="flex items-center space-x-2">
-                <ArrowsUpDownIcon className="w-5 h-5 text-primary-600" />
+                <ArrowsUpDownIcon className="w-5 h-5 text-purple-600" />
                 <span className="text-sm font-semibold text-gray-700">Sort by:</span>
               </div>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2.5 text-sm bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 hover:border-gray-300 shadow-soft w-full sm:w-auto"
+                className="px-4 py-2.5 text-sm bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-300 hover:border-gray-300 shadow-soft w-full sm:w-auto"
               >
                 <option value="featured">Featured</option>
                 <option value="price-low">Price: Low to High</option>
@@ -275,9 +275,9 @@ export default function FeaturedProducts() {
           ))}
         </div>
 
-        {/* View All Button */}
+        {/* Enhanced View All Button */}
         <div className="text-center animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-          <button className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white font-semibold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-glow focus:ring-4 focus:ring-primary-500/20 focus:outline-none">
+          <button className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-glow focus:ring-4 focus:ring-purple-500/20 focus:outline-none">
             <span>View All Products</span>
             <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <ArrowUpIcon className="w-3 h-3 text-white" />

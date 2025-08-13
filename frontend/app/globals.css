@@ -18,6 +18,11 @@
     font-weight: 600;
   }
 
+  /* Safe area for mobile devices with home indicators */
+  .h-safe-area-inset-bottom {
+    height: env(safe-area-inset-bottom);
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
