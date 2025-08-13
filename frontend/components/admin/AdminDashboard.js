@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   CubeIcon,
-  ShoppingBagIcon,
-  UsersIcon,
   CurrencyDollarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
   EyeIcon,
-  PlusIcon
+  PlusIcon,
+  ShoppingBagIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  UsersIcon
 } from '@heroicons/react/24/outline';
-import { apiClient } from '../../../lib/api';
+import { apiClient } from '../../lib/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { NetworkError } from '../ui/ErrorBoundary';
 
@@ -71,9 +71,9 @@ const AdminDashboard = () => {
             <div className="text-sm">
               <div className="flex items-center">
                 {changeType === 'increase' ? (
-                  <TrendingUpIcon className="h-4 w-4 text-green-400" />
+                  <ArrowUpIcon className="h-4 w-4 text-green-400" />
                 ) : (
-                  <TrendingDownIcon className="h-4 w-4 text-red-400" />
+                  <ArrowDownIcon className="h-4 w-4 text-red-400" />
                 )}
                 <span className={`ml-2 font-medium ${
                   changeType === 'increase' ? 'text-green-600' : 'text-red-600'

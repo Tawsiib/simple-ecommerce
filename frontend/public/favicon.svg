@@ -1,0 +1,37 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ed7516;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fef3c7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background circle -->
+  <circle cx="16" cy="16" r="16" fill="url(#bgGradient)"/>
+  
+  <!-- Beauty/skincare icon - stylized flower/petal design -->
+  <g fill="url(#iconGradient)">
+    <!-- Center circle -->
+    <circle cx="16" cy="16" r="3" opacity="0.9"/>
+    
+    <!-- Petals/leaves around center -->
+    <ellipse cx="16" cy="8" rx="2" ry="4" opacity="0.8"/>
+    <ellipse cx="16" cy="24" rx="2" ry="4" opacity="0.8"/>
+    <ellipse cx="8" cy="16" rx="4" ry="2" opacity="0.8"/>
+    <ellipse cx="24" cy="16" rx="4" ry="2" opacity="0.8"/>
+    
+    <!-- Diagonal petals -->
+    <ellipse cx="11" cy="11" rx="2.5" ry="3" opacity="0.7" transform="rotate(-45 11 11)"/>
+    <ellipse cx="21" cy="21" rx="2.5" ry="3" opacity="0.7" transform="rotate(-45 21 21)"/>
+    <ellipse cx="21" cy="11" rx="2.5" ry="3" opacity="0.7" transform="rotate(45 21 11)"/>
+    <ellipse cx="11" cy="21" rx="2.5" ry="3" opacity="0.7" transform="rotate(45 11 21)"/>
+  </g>
+  
+  <!-- Subtle glow effect -->
+  <circle cx="16" cy="16" r="14" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" opacity="0.5"/>
+</svg>

@@ -15,14 +15,25 @@ const AuthProvider = ({ children }) => {
   const { initialize: initializeAddress } = useAddressStore();
 
   useEffect(() => {
-    // Initialize all stores
-    initializeAuth();
-    initializeCart();
-    initializeWishlist();
-    initializeOrder();
-    initializeAddress();
+    // Initialize all stores in the background
+    const initializeStores = async () => {
+      try {
+        await Promise.all([
+          initializeAuth(),
+          initializeCart(),
+          initializeWishlist(),
+          initializeOrder(),
+          initializeAddress()
+        ]);
+      } catch (error) {
+        console.error('Failed to initialize stores:', error);
+      }
+    };
+
+    initializeStores();
   }, [initializeAuth, initializeCart, initializeWishlist, initializeOrder, initializeAddress]);
 
+  // Always render children immediately
   return children;
 };
 

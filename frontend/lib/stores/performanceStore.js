@@ -250,14 +250,9 @@ const usePerformanceStore = create(
 
             // Initialize store
             initialize: async () => {
-                try {
-                    await Promise.all([
-                        get().fetchOverview(),
-                        get().fetchMemoryUsage(),
-                    ]);
-                } catch (error) {
-                    console.error('Failed to initialize performance store:', error);
-                }
+                // Don't fetch performance data during initialization to prevent auth errors
+                // Performance data will be fetched when user actually needs to see it
+                console.log('Performance store initialized');
             },
 
             // Reset store

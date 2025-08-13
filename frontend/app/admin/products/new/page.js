@@ -1,13 +1,14 @@
 'use client';
 
-import AdminLayout from '../../../components/admin/AdminLayout';
-import AdminProductForm from '../../../components/admin/AdminProductForm';
+// import AdminLayout from '../../../components/admin/AdminLayout';
+// import AdminProductForm from '../../../components/admin/AdminProductForm';
 
 const NewProductPage = () => {
   return (
-    <AdminLayout>
-      <AdminProductForm mode="create" />
-    </AdminLayout>
+    <div>
+      <h1>New Product</h1>
+      <p>Admin components temporarily disabled for debugging</p>
+    </div>
   );
 };
 

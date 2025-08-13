@@ -96,6 +96,31 @@ class SearchAnalyticsController extends Controller
     }
 
     /**
+     * Get popular search terms (public endpoint)
+     */
+    public function getPopularSearchesPublic(Request $request): JsonResponse
+    {
+        try {
+            $period = $request->get('period', '7d');
+            $startDate = $this->getStartDate($period);
+            $popularSearches = $this->getPopularSearches($startDate);
+
+            return response()->json([
+                'success' => true,
+                'data' => $popularSearches,
+                'message' => 'Popular searches retrieved successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve popular searches',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Get search performance metrics
      */
     private function getPerformanceMetrics(Carbon $startDate): array

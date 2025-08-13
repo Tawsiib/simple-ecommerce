@@ -6,7 +6,9 @@ import {
   HeartIcon, 
   ShoppingBagIcon, 
   StarIcon,
-  EyeIcon
+  EyeIcon,
+  SparklesIcon,
+  FireIcon
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import useCartStore from '../lib/stores/cartStore';
@@ -94,52 +96,55 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="group bg-white rounded-xl shadow-sm hover:shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 transform hover:-translate-y-1">
+    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft hover:shadow-large border border-white/20 overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:border-white/40">
       {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden bg-gray-100">
+      <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
         <Link href={`/product/${slug}`}>
           <img
             src={images?.[0]?.url || '/placeholder-product.jpg'}
             alt={name}
-            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
             loading="lazy"
           />
         </Link>
 
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
           {is_new && (
-            <span className="bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">
-              New
-            </span>
+            <div className="flex items-center space-x-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg animate-fade-in-up">
+              <SparklesIcon className="w-3 h-3" />
+              <span>New</span>
+            </div>
           )}
           {is_featured && (
-            <span className="bg-blue-500 text-white text-xs font-medium px-2 py-1 rounded-full">
-              Featured
-            </span>
+            <div className="flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <StarIcon className="w-3 h-3" />
+              <span>Featured</span>
+            </div>
           )}
           {is_best_seller && (
-            <span className="bg-yellow-500 text-white text-xs font-medium px-2 py-1 rounded-full">
-              Best Seller
-            </span>
+            <div className="flex items-center space-x-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <FireIcon className="w-3 h-3" />
+              <span>Best Seller</span>
+            </div>
           )}
         </div>
 
         {/* Discount Badge */}
         {discount_percentage > 0 && (
-          <div className="absolute top-3 right-3">
-            <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <div className="absolute top-4 right-4">
+            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
               -{discount_percentage}%
-            </span>
+            </div>
           </div>
         )}
 
         {/* Quick Actions Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-          <div className="flex space-x-2">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
+          <div className="flex space-x-3">
             <Link
               href={`/product/${slug}`}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-700 hover:text-rose-600 transition-colors shadow-lg"
+              className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-gray-700 hover:text-primary-600 transition-all duration-300 shadow-lg hover:scale-110 hover:shadow-glow"
               aria-label="View product details"
             >
               <EyeIcon className="w-5 h-5" />
@@ -149,35 +154,38 @@ const ProductCard = ({ product }) => {
 
         {/* Stock Status */}
         {isOutOfStock && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center">
+            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-lg">
               Out of Stock
-            </span>
+            </div>
           </div>
         )}
+
+        {/* Hover Effect Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="p-5">
         {/* Category & Brand */}
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-          <span className="hover:text-rose-600 transition-colors cursor-pointer">
+        <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
+          <span className="hover:text-primary-600 transition-colors cursor-pointer font-medium">
             {category?.name}
           </span>
-          <span className="hover:text-rose-600 transition-colors cursor-pointer">
+          <span className="hover:text-primary-600 transition-colors cursor-pointer font-medium">
             {brand?.name}
           </span>
         </div>
 
         {/* Product Name */}
         <Link href={`/product/${slug}`}>
-          <h3 className="font-medium text-gray-900 group-hover:text-rose-600 transition-colors line-clamp-2 mb-2 min-h-[2.5rem]">
+          <h3 className="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors line-clamp-2 mb-3 min-h-[2.5rem] leading-tight">
             {name}
           </h3>
         </Link>
 
         {/* Rating */}
-        <div className="flex items-center mb-3">
+        <div className="flex items-center mb-4">
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
               <StarIcon
@@ -190,15 +198,15 @@ const ProductCard = ({ product }) => {
               />
             ))}
           </div>
-          <span className="ml-2 text-sm text-gray-500">
+          <span className="ml-2 text-sm text-gray-500 font-medium">
             ({review_count || 0})
           </span>
         </div>
 
         {/* Price */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <span className="text-lg font-bold text-gray-900">
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center space-x-3">
+            <span className="text-xl font-bold text-gray-900">
               {formatPrice(selling_price)}
             </span>
             {original_price > selling_price && (
@@ -210,17 +218,17 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex space-x-2">
+        <div className="flex space-x-3">
           {/* Add to Cart Button */}
           <button
             onClick={handleAddToCart}
             disabled={isLoading || isOutOfStock || isInUserCart}
-            className={`flex-1 flex items-center justify-center px-3 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
+            className={`flex-1 flex items-center justify-center px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
               isInUserCart
-                ? 'bg-green-100 text-green-700 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white cursor-not-allowed shadow-lg'
                 : isOutOfStock
                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                : 'bg-rose-600 text-white hover:bg-rose-700 transform hover:scale-105'
+                : 'bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:from-primary-600 hover:to-accent-600 transform hover:scale-105 hover:shadow-glow'
             }`}
           >
             {isLoading ? (
@@ -242,10 +250,10 @@ const ProductCard = ({ product }) => {
           <button
             onClick={handleToggleWishlist}
             disabled={isWishlistLoading}
-            className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center transition-all duration-200 ${
+            className={`w-12 h-12 rounded-xl border-2 flex items-center justify-center transition-all duration-300 ${
               isInUserWishlist
-                ? 'border-rose-500 bg-rose-50 text-rose-600'
-                : 'border-gray-300 text-gray-600 hover:border-rose-500 hover:text-rose-600 hover:bg-rose-50'
+                ? 'border-primary-500 bg-primary-50 text-primary-600 shadow-lg'
+                : 'border-gray-300 text-gray-600 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50 hover:shadow-medium'
             }`}
             aria-label={isInUserWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
           >
@@ -259,6 +267,9 @@ const ProductCard = ({ product }) => {
           </button>
         </div>
       </div>
+
+      {/* Bottom Border Glow Effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
     </div>
   );
 };

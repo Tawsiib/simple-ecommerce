@@ -84,6 +84,7 @@ class Product extends Model implements HasMedia
     protected $appends = [
         'featured_image_url',
         'gallery_urls',
+        'any_image_url',
         'stock_status',
         'discount_percentage',
         'formatted_price',
@@ -191,14 +192,36 @@ class Product extends Model implements HasMedia
     public function getFeaturedImageUrlAttribute(): string
     {
         $media = $this->getFirstMedia('featured');
-        return $media ? $media->getUrl() : asset('images/default-product.jpg');
+        return $media ? $media->getUrl() : asset('images/default-product.svg');
     }
 
     public function getGalleryUrlsAttribute(): array
     {
-        return $this->getMedia('gallery')->map(function ($media) {
+        $media = $this->getMedia('gallery');
+        if ($media->isEmpty()) {
+            return [asset('images/default-product.svg')];
+        }
+        return $media->map(function ($media) {
             return $media->getUrl();
         })->toArray();
+    }
+
+    public function getAnyImageUrlAttribute(): string
+    {
+        // Try featured image first
+        $featured = $this->getFirstMedia('featured');
+        if ($featured) {
+            return $featured->getUrl();
+        }
+        
+        // Try gallery images
+        $gallery = $this->getFirstMedia('gallery');
+        if ($gallery) {
+            return $gallery->getUrl();
+        }
+        
+        // Fallback to default
+        return asset('images/default-product.svg');
     }
 
     public function getStockStatusAttribute(): string

@@ -213,11 +213,8 @@ const useAuthStore = create(
         const { token } = get();
         if (token) {
           apiClient.setAuthToken(token);
-          // Optionally verify token by getting profile
-          get().getProfile().catch(() => {
-            // If profile fetch fails, clear auth state
-            get().logout();
-          });
+          // Don't verify token during initialization to prevent auth errors
+          // Token verification can be done when user actually needs to use the app
         }
       },
 

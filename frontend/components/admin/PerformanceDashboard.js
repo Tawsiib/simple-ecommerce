@@ -7,7 +7,7 @@ import {
     PieChart, Pie, Cell
 } from 'recharts';
 import { 
-    Clock, Database, Memory, Zap, TrendingUp, TrendingDown,
+    Clock, Database, HardDrive, Zap, TrendingUp, TrendingDown,
     AlertTriangle, CheckCircle, XCircle, RefreshCw
 } from 'lucide-react';
 
@@ -202,7 +202,7 @@ const PerformanceDashboard = () => {
                                 <p className="text-sm font-medium text-gray-600">Current Memory</p>
                                 <p className="text-2xl font-bold text-gray-900">{realTimeMetrics.current_memory_mb} MB</p>
                             </div>
-                            <Memory className="w-8 h-8 text-green-600" />
+                            <HardDrive className="w-8 h-8 text-green-600" />
                         </div>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-md">

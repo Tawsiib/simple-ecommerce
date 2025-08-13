@@ -10,7 +10,11 @@ export function Providers({ children }) {
         defaultOptions: {
           queries: {
             staleTime: 60 * 1000, // 1 minute
+            gcTime: 5 * 60 * 1000, // 5 minutes
             refetchOnWindowFocus: false,
+            refetchOnMount: false, // Prevent refetching on mount
+            retry: 1, // Only retry once
+            retryDelay: 1000, // Wait 1 second before retry
           },
         },
       })

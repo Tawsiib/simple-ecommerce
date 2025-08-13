@@ -118,6 +118,14 @@ const useOrderStore = create(
       // Fetch order statistics
       fetchOrderStatistics: async () => {
         try {
+          // Check if user is authenticated before making API call
+          const token = localStorage.getItem('auth_token');
+          if (!token) {
+            // User not authenticated, just set empty statistics
+            set({ orderStatistics: null, isLoading: false, error: null });
+            return;
+          }
+
           set({ isLoading: true, error: null });
           const response = await apiClient.get('/orders/statistics');
           
@@ -129,7 +137,10 @@ const useOrderStore = create(
         } catch (error) {
           const message = error.response?.data?.message || error.message || 'Failed to fetch statistics';
           set({ error: message });
-          toast.error(message);
+          // Don't show toast for authentication errors
+          if (!error.response?.data?.message?.includes('Unauthenticated')) {
+            toast.error(message);
+          }
         } finally {
           set({ isLoading: false });
         }

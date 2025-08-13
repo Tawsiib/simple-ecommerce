@@ -1,0 +1,44 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ecfdf5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d1fae5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bottle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="serum" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="300" fill="url(#bg)" rx="12" ry="12"/>
+  
+  <!-- Bottle -->
+  <rect x="120" y="80" width="60" height="120" fill="url(#bottle)" rx="8" ry="8" stroke="#047857" stroke-width="2"/>
+  
+  <!-- Bottle neck -->
+  <rect x="130" y="60" width="40" height="30" fill="url(#bottle)" rx="4" ry="4" stroke="#047857" stroke-width="2"/>
+  
+  <!-- Bottle cap -->
+  <rect x="125" y="40" width="50" height="25" fill="#065f46" rx="6" ry="6" stroke="#064e3b" stroke-width="2"/>
+  
+  <!-- Serum inside -->
+  <rect x="125" y="85" width="50" height="110" fill="url(#serum)" opacity="0.7" rx="6" ry="6"/>
+  
+  <!-- Vitamin C symbol -->
+  <text x="150" y="140" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#047857">C</text>
+  <text x="150" y="155" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#047857">VITAMIN</text>
+  
+  <!-- Product name -->
+  <text x="150" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#047857">Vitamin C Serum</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="80" cy="80" r="4" fill="#10b981" opacity="0.6"/>
+  <circle cx="220" cy="80" r="4" fill="#10b981" opacity="0.6"/>
+  <circle cx="80" cy="220" r="4" fill="#10b981" opacity="0.6"/>
+  <circle cx="220" cy="220" r="4" fill="#10b981" opacity="0.6"/>
+</svg>

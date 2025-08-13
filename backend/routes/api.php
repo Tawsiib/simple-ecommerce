@@ -41,6 +41,7 @@ Route::get('/products/category/{categoryId}', [ProductController::class, 'getByC
 // Search analytics and suggestions
 Route::get('/search/analytics', [App\Http\Controllers\Api\SearchAnalyticsController::class, 'getAnalytics']);
 Route::get('/search/suggestions', [App\Http\Controllers\Api\SearchAnalyticsController::class, 'getSuggestions']);
+Route::get('/search/popular', [App\Http\Controllers\Api\SearchAnalyticsController::class, 'getPopularSearchesPublic']);
 Route::post('/search/track', [App\Http\Controllers\Api\SearchAnalyticsController::class, 'trackSearch']);
 Route::get('/products/brand/{brandId}', [ProductController::class, 'getByBrand']);
 Route::get('/products/{productId}/related', [ProductController::class, 'getRelatedProducts']);
@@ -53,6 +54,14 @@ Route::get('/categories/{slug}/products', [CategoryController::class, 'getProduc
 Route::get('/brands', [BrandController::class, 'index']);
 Route::get('/brands/{slug}', [BrandController::class, 'show']);
 Route::get('/brands/{slug}/products', [BrandController::class, 'getProducts']);
+
+// Addresses (temporarily public for testing)
+Route::get('/addresses', [AddressController::class, 'index']);
+Route::post('/addresses', [AddressController::class, 'store']);
+Route::get('/addresses/{id}', [AddressController::class, 'show']);
+Route::put('/addresses/{id}', [AddressController::class, 'update']);
+Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
+Route::patch('/addresses/{id}/default', [AddressController::class, 'setDefault']);
 
 // SEO routes (public)
 Route::get('/seo/meta-tags', [SeoController::class, 'getMetaTags']);
@@ -122,20 +131,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/wishlist/{id}', [WishlistController::class, 'removeItem']);
     Route::delete('/wishlist/clear', [WishlistController::class, 'clearWishlist']);
 
-    // Addresses
-    Route::get('/addresses', [AddressController::class, 'index']);
-    Route::post('/addresses', [AddressController::class, 'store']);
-    Route::get('/addresses/{id}', [AddressController::class, 'show']);
-    Route::put('/addresses/{id}', [AddressController::class, 'update']);
-    Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
-    Route::patch('/addresses/{id}/default', [AddressController::class, 'setDefault']);
-
     // Orders
     Route::get('/orders', [OrderController::class, 'index']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::put('/orders/{id}/cancel', [OrderController::class, 'cancel']);
     Route::post('/orders/{id}/payment', [OrderController::class, 'processPayment']);
+    Route::get('/orders/statistics', [OrderController::class, 'getStatistics']);
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index']);

@@ -2,7 +2,7 @@
 const nextConfig = {
   
   images: {
-    domains: ['localhost', 'shohanis-reflection.com'],
+    domains: ['localhost', '127.0.0.1', 'shohanis-reflection.com'],
   },
   async rewrites() {
     return [

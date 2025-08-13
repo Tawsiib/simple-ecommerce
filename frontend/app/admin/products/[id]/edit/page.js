@@ -1,13 +1,14 @@
 'use client';
 
-import AdminLayout from '../../../../components/admin/AdminLayout';
-import AdminProductForm from '../../../../components/admin/AdminProductForm';
+// import AdminLayout from '../../../../components/admin/AdminLayout';
+// import AdminProductForm from '../../../../components/admin/AdminProductForm';
 
 const EditProductPage = ({ params }) => {
   return (
-    <AdminLayout>
-      <AdminProductForm mode="edit" productId={params.id} />
-    </AdminLayout>
+    <div>
+      <h1>Edit Product {params.id}</h1>
+      <p>Admin components temporarily disabled for debugging</p>
+    </div>
   );
 };
 

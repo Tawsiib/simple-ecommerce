@@ -1,5 +1,5 @@
-import AdminLayout from '../../../components/admin/AdminLayout';
-import AnalyticsDashboard from '../../../components/analytics/AnalyticsDashboard';
+import AdminLayout from '../../../components/admin/AdminLayout.js';
+import AnalyticsDashboard from '../../../components/analytics/AnalyticsDashboard.js';
 
 export default function AdminAnalyticsPage() {
   return (

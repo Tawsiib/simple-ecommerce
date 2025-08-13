@@ -285,14 +285,11 @@ const useCartStore = create(
       // Initialize cart from storage and sync with API
       initialize: async () => {
         const { items } = get();
+        // Don't sync with API during initialization to prevent auth errors
+        // Cart will be synced when user actually needs to use it
         if (items.length > 0) {
-          // Try to sync with API
-          try {
-            await get().fetchCart();
-          } catch (error) {
-            console.error('Failed to sync cart with API:', error);
-            // Keep local cart if API sync fails
-          }
+          // Just keep local cart data
+          console.log('Cart initialized from local storage');
         }
       },
     }),

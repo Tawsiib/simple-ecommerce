@@ -224,14 +224,11 @@ const useWishlistStore = create(
       // Initialize wishlist from storage and sync with API
       initialize: async () => {
         const { items } = get();
+        // Don't sync with API during initialization to prevent auth errors
+        // Wishlist will be synced when user actually needs to use it
         if (items.length > 0) {
-          // Try to sync with API
-          try {
-            await get().fetchWishlist();
-          } catch (error) {
-            console.error('Failed to sync wishlist with API:', error);
-            // Keep local wishlist if API sync fails
-          }
+          // Just keep local wishlist data
+          console.log('Wishlist initialized from local storage');
         }
       },
     }),

@@ -18,6 +18,15 @@ class AddressController extends Controller
         try {
             $user = $request->user();
             
+            // If no authenticated user, return empty data
+            if (!$user) {
+                return response()->json([
+                    'success' => true,
+                    'data' => [],
+                    'message' => 'No addresses found (user not authenticated)'
+                ]);
+            }
+            
             $addresses = Address::where('user_id', $user->id)
                 ->orderBy('is_default', 'desc')
                 ->orderBy('created_at', 'desc')
@@ -46,6 +55,16 @@ class AddressController extends Controller
     public function store(Request $request): JsonResponse
     {
         try {
+            $user = $request->user();
+            
+            // If no authenticated user, return error
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Authentication required to add addresses'
+                ], 401);
+            }
+
             $validator = Validator::make($request->all(), [
                 'type' => 'required|string|in:home,work,other',
                 'address_line_1' => 'required|string|max:255',
@@ -66,8 +85,6 @@ class AddressController extends Controller
                     'errors' => $validator->errors()
                 ], 422);
             }
-
-            $user = $request->user();
 
             // If this is the first address or user wants it as default, set as default
             if ($request->is_default || Address::where('user_id', $user->id)->count() === 0) {

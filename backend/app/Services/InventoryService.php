@@ -9,6 +9,7 @@ use App\Models\PurchaseOrderItem;
 use App\Models\InventoryAlert;
 use App\Models\InventoryTransaction;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -172,7 +173,7 @@ class InventoryService
                 'status' => 'draft',
                 'order_date' => now(),
                 'expected_delivery_date' => now()->addDays($supplier->lead_time_days),
-                'user_id' => auth()->id() ?? null,
+                'user_id' => Auth::id(),
             ]);
             
             $subtotal = 0;
@@ -418,7 +419,7 @@ class InventoryService
                 'quantity_before' => $oldStock,
                 'quantity_after' => $newStock,
                 'notes' => $notes,
-                'user_id' => auth()->id() ?? null,
+                'user_id' => Auth::id(),
             ]);
             
             DB::commit();

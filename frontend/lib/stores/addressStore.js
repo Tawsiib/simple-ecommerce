@@ -18,6 +18,14 @@ const useAddressStore = create(
       // Fetch addresses
       fetchAddresses: async () => {
         try {
+          // Check if user is authenticated before making API call
+          const token = localStorage.getItem('auth_token');
+          if (!token) {
+            // User not authenticated, just set empty addresses
+            set({ addresses: [], isLoading: false, error: null });
+            return;
+          }
+
           set({ isLoading: true, error: null });
           const response = await apiClient.get('/addresses');
           
@@ -29,7 +37,10 @@ const useAddressStore = create(
         } catch (error) {
           const message = error.response?.data?.message || error.message || 'Failed to fetch addresses';
           set({ error: message });
-          toast.error(message);
+          // Don't show toast for authentication errors
+          if (!error.response?.data?.message?.includes('Unauthenticated')) {
+            toast.error(message);
+          }
         } finally {
           set({ isLoading: false });
         }

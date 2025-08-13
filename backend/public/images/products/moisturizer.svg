@@ -1,0 +1,37 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tube" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cream" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="300" fill="url(#bg)" rx="12" ry="12"/>
+  
+  <!-- Tube -->
+  <ellipse cx="150" cy="180" rx="50" ry="70" fill="url(#tube)" stroke="#0369a1" stroke-width="3"/>
+  
+  <!-- Tube cap -->
+  <ellipse cx="150" cy="110" rx="55" ry="20" fill="#0c4a6e" stroke="#075985" stroke-width="2"/>
+  
+  <!-- Cream coming out -->
+  <ellipse cx="150" cy="90" rx="20" ry="15" fill="url(#cream)" opacity="0.9"/>
+  
+  <!-- Product name -->
+  <text x="150" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#0369a1">Hydrating Moisturizer</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="80" cy="80" r="4" fill="#0ea5e9" opacity="0.6"/>
+  <circle cx="220" cy="80" r="4" fill="#0ea5e9" opacity="0.6"/>
+  <circle cx="80" cy="220" r="4" fill="#0ea5e9" opacity="0.6"/>
+  <circle cx="220" cy="220" r="4" fill="#0ea5e9" opacity="0.6"/>
+</svg>

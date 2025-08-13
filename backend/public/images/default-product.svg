@@ -1,0 +1,32 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="300" fill="url(#bg)" rx="8" ry="8"/>
+  
+  <!-- Accent bar -->
+  <rect x="0" y="0" width="300" height="6" fill="url(#accent)" rx="8" ry="8"/>
+  
+  <!-- Product icon -->
+  <circle cx="150" cy="120" r="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="150" cy="120" r="25" fill="#3b82f6" opacity="0.7"/>
+  
+  <!-- Text -->
+  <text x="150" y="200" font-family="Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#475569">Product Image</text>
+  <text x="150" y="220" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">No Image Available</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="80" cy="80" r="3" fill="#3b82f6" opacity="0.3"/>
+  <circle cx="220" cy="80" r="3" fill="#3b82f6" opacity="0.3"/>
+  <circle cx="80" cy="220" r="3" fill="#3b82f6" opacity="0.3"/>
+  <circle cx="220" cy="220" r="3" fill="#3b82f6" opacity="0.3"/>
+</svg>

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { 
-  ChartBarIcon, 
-  MagnifyingGlassIcon, 
-  ClockIcon, 
-  UserGroupIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
-  MinusIcon
+import {
+  ChartBarIcon,
+  ClockIcon,
+  MagnifyingGlassIcon,
+  MinusIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  UserGroupIcon
 } from '@heroicons/react/24/outline';
 import { apiClient } from '../../lib/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
@@ -44,9 +44,9 @@ const SearchAnalytics = () => {
   const getTrendIcon = (trend) => {
     switch (trend) {
       case 'up':
-        return <TrendingUpIcon className="h-4 w-4 text-green-500" />;
+        return <ArrowUpIcon className="h-4 w-4 text-green-500" />;
       case 'down':
-        return <TrendingDownIcon className="h-4 w-4 text-red-500" />;
+        return <ArrowDownIcon className="h-4 w-4 text-red-500" />;
       default:
         return <MinusIcon className="h-4 w-4 text-gray-500" />;
     }

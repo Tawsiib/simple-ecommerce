@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { EyeIcon, EyeSlashIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
-import { apiClient } from '../../../lib/api';
+import { apiClient } from '../../lib/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import toast from 'react-hot-toast';
 

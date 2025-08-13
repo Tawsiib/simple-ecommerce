@@ -11,6 +11,7 @@ import {
   ShoppingCartIcon,
   ChevronRightIcon
 } from '@heroicons/react/24/outline';
+import { MobileSearchBar } from './SearchBar';
 import useCartStore from '../lib/stores/cartStore';
 import useWishlistStore from '../lib/stores/wishlistStore';
 
@@ -61,10 +62,9 @@ export default function MobileNavigation({ isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   // Handle search
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+  const handleSearch = (query) => {
+    if (query.trim()) {
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
       onClose();
     }
   };
@@ -103,16 +103,11 @@ export default function MobileNavigation({ isOpen, onClose }) {
 
           {/* Search Bar */}
           <div className="p-4 border-b border-gray-200">
-            <form onSubmit={handleSearch} className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
-              />
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            </form>
+            <MobileSearchBar
+              onSearch={handleSearch}
+              placeholder="Search products..."
+              className="w-full"
+            />
           </div>
 
           {/* Navigation Links */}

@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { MagnifyingGlassIcon, FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import AdvancedSearch from '../../components/search/AdvancedSearch';
-import ProductCard from '../../components/ProductCard';
-import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import AdvancedSearch from '../../components/search/AdvancedSearch.js';
+import ProductCard from '../../components/ProductCard.js';
+import LoadingSpinner from '../../components/ui/LoadingSpinner.js';
 import { apiClient } from '../../lib/api';
 
-const SearchResults = () => {
+const SearchResultsContent = () => {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -303,6 +303,22 @@ const SearchResults = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SearchResults = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex justify-center items-center h-64">
+            <LoadingSpinner size="lg" />
+          </div>
+        </div>
+      </div>
+    }>
+      <SearchResultsContent />
+    </Suspense>
   );
 };
 

@@ -17,6 +17,46 @@ use Illuminate\Support\Str;
 class OrderController extends Controller
 {
     /**
+     * Get order statistics (public endpoint)
+     */
+    public function getStatistics(Request $request): JsonResponse
+    {
+        try {
+            // This would typically come from actual order data
+            // For now, we'll return mock data
+            $statistics = [
+                'total_orders' => 1250,
+                'pending_orders' => 45,
+                'completed_orders' => 1180,
+                'cancelled_orders' => 25,
+                'total_revenue' => 125000.00,
+                'average_order_value' => 100.00,
+                'monthly_trend' => [
+                    'jan' => 120,
+                    'feb' => 135,
+                    'mar' => 142,
+                    'apr' => 158,
+                    'may' => 165,
+                    'jun' => 180,
+                ]
+            ];
+
+            return response()->json([
+                'success' => true,
+                'data' => $statistics,
+                'message' => 'Order statistics retrieved successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve order statistics',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Get user's orders
      */
     public function index(Request $request): JsonResponse

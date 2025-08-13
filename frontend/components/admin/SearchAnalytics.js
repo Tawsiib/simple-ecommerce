@@ -9,7 +9,7 @@ import {
   EyeIcon,
   ClockIcon
 } from '@heroicons/react/24/outline';
-import { apiClient } from '../../../lib/api';
+import { apiClient } from '../../lib/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
 
 const SearchAnalytics = () => {

@@ -1,0 +1,9 @@
+# Apple Touch Icon (180x180 PNG)
+# This is a placeholder. You should convert the favicon.svg to a 180x180 PNG format.
+# You can use online tools like:
+# - https://favicon.io/favicon-converter/
+# - https://convertio.co/svg-png/
+# - Or use ImageMagick: magick favicon.svg -resize 180x180 apple-touch-icon.png
+# 
+# The favicon.svg file is already created and will work in modern browsers.
+# For maximum compatibility, convert it to PNG format at 180x180 pixels.

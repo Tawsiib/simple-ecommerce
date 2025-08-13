@@ -4,12 +4,53 @@ import { toast } from 'react-hot-toast';
 // Create axios instance
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
-  timeout: 10000,
+  timeout: 15000, // Increased timeout to 15 seconds
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
+  // Add request deduplication
+  requestId: true,
 });
+
+// Track navigation state to prevent errors during route changes
+let isNavigating = false;
+let navigationTimeout = null;
+let lastErrorTime = 0;
+const ERROR_DEBOUNCE_MS = 3000; // Don't show errors more frequently than every 3 seconds
+
+if (typeof window !== 'undefined') {
+  // Listen for route changes in Next.js
+  const originalPushState = history.pushState;
+  const originalReplaceState = history.replaceState;
+  
+  history.pushState = function(...args) {
+    isNavigating = true;
+    clearTimeout(navigationTimeout);
+    navigationTimeout = setTimeout(() => {
+      isNavigating = false;
+    }, 2000);
+    return originalPushState.apply(this, args);
+  };
+  
+  history.replaceState = function(...args) {
+    isNavigating = true;
+    clearTimeout(navigationTimeout);
+    navigationTimeout = setTimeout(() => {
+      isNavigating = false;
+    }, 2000);
+    return originalReplaceState.apply(this, args);
+  };
+  
+  // Also listen for popstate (back/forward navigation)
+  window.addEventListener('popstate', () => {
+    isNavigating = true;
+    clearTimeout(navigationTimeout);
+    navigationTimeout = setTimeout(() => {
+      isNavigating = false;
+    }, 2000);
+  });
+}
 
 // Request interceptor - add auth token
 api.interceptors.request.use(
@@ -63,11 +104,52 @@ api.interceptors.response.use(
       }
     }
 
-    // Handle other errors
-    if (error.response?.data?.message) {
-      toast.error(error.response.data.message);
-    } else if (error.message) {
-      toast.error(error.message);
+    // Don't show error toasts for common navigation/404 errors
+    // Only show errors for actual user actions (POST, PUT, DELETE) or critical failures
+    const shouldShowError = 
+      !originalRequest._retry && 
+      !isNavigating && // Don't show errors during navigation
+      error.response?.status !== 404 && 
+      error.response?.status !== 401 &&
+      error.response?.status !== 422 &&
+      error.response?.status !== 500 && // Don't show 500 errors (server issues)
+      !['GET'].includes(originalRequest.method?.toUpperCase()) && // Don't show errors for GET requests
+      !error.message?.includes('Network Error') &&
+      !error.message?.includes('timeout') &&
+      !error.message?.includes('canceled') && // Don't show errors for canceled requests
+      !error.code?.includes('ERR_CANCELED') && // Don't show errors for canceled requests
+      !error.message?.includes('Request failed'); // Don't show generic request failed errors
+
+    if (shouldShowError) {
+      // Prevent duplicate error messages by checking if we've already shown this error
+      const errorKey = `${error.response?.status}-${error.response?.data?.message || error.message}`;
+      
+      if (!window.shownErrors) {
+        window.shownErrors = new Set();
+      }
+      
+      // Check debounce timing
+      const now = Date.now();
+      if (now - lastErrorTime < ERROR_DEBOUNCE_MS) {
+        return Promise.reject(error);
+      }
+      
+      if (!window.shownErrors.has(errorKey)) {
+        window.shownErrors.add(errorKey);
+        lastErrorTime = now;
+        
+        // Show error toast only for critical errors
+        if (error.response?.data?.message) {
+          toast.error(error.response.data.message);
+        } else if (error.message) {
+          toast.error(error.message);
+        }
+        
+        // Clear shown errors after 10 seconds to allow new errors
+        setTimeout(() => {
+          window.shownErrors.delete(errorKey);
+        }, 10000);
+      }
     }
 
     return Promise.reject(error);
@@ -88,7 +170,7 @@ export const endpoints = {
   // Products
   products: {
     list: '/products',
-    featured: '/products/featured',
+    featured: '/products?featured=true',
     byCategory: (categoryId) => `/products/category/${categoryId}`,
     search: '/products/search',
     show: (id) => `/products/${id}`,
