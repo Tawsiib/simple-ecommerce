@@ -77,17 +77,17 @@ export default function FeaturedProducts() {
   const { data: categoriesData, isLoading: categoriesLoading, error: categoriesError, refetch: refetchCategories } = useCategories();
 
   // Use fallback data if API is not available
-  const products = featuredProductsData?.data || fallbackProducts;
-  const categories = categoriesData?.data ? [{ id: 'all', name: 'All Products' }, ...categoriesData.data] : [];
+  const products = Array.isArray(featuredProductsData?.data) ? featuredProductsData.data : fallbackProducts;
+  const categories = Array.isArray(categoriesData?.data) ? [{ id: 'all', name: 'All Products' }, ...categoriesData.data] : [];
 
-  const filteredProducts = products.filter(product => {
+  const filteredProducts = Array.isArray(products) ? products.filter(product => {
     if (selectedCategory === 'all') return true;
     // Handle both API data structure and fallback data
     const productCategory = product.category?.name || product.category;
     return productCategory?.toLowerCase() === selectedCategory;
-  });
+  }) : [];
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = Array.isArray(filteredProducts) ? [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case 'price-low':
         return (a.price || a.selling_price || 0) - (b.price || b.selling_price || 0);
@@ -100,7 +100,7 @@ export default function FeaturedProducts() {
       default:
         return 0;
     }
-  });
+  }) : [];
 
   // Loading state
   if (productsLoading || categoriesLoading) {

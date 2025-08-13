@@ -49,7 +49,7 @@ export default function Brands() {
   const { data: brandsData, isLoading, error, refetch } = useBrands();
 
   // Use fallback data if API is not available
-  const brands = brandsData?.data || fallbackBrands;
+  const brands = Array.isArray(brandsData?.data) ? brandsData.data : fallbackBrands;
 
   if (isLoading) {
     return (

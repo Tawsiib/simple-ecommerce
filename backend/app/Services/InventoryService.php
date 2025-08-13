@@ -176,6 +176,7 @@ class InventoryService
             ]);
             
             $subtotal = 0;
+            
             foreach ($products as $product) {
                 $quantity = $product->reorder_quantity;
                 $unitCost = $product->cost_price ?? 0;

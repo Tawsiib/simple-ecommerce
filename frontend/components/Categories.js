@@ -60,7 +60,7 @@ export default function Categories() {
   const { data: categories, isLoading, error, refetch } = useCategories();
 
   // Use fallback data if API is not available or loading
-  const displayCategories = categories?.data || fallbackCategories;
+  const displayCategories = Array.isArray(categories?.data) ? categories.data : fallbackCategories;
 
   if (isLoading) {
     return (
