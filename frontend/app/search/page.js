@@ -220,10 +220,14 @@ const SearchResultsContent = () => {
         <div className="lg:hidden mb-6">
           <button
             onClick={() => setShowMobileFilters(!showMobileFilters)}
-            className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+            className="w-full flex items-center justify-center px-6 py-4 border-2 border-gray-200 rounded-2xl bg-white/95 backdrop-blur-sm hover:bg-gradient-to-r hover:from-primary-50/50 hover:to-accent-50/50 focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 group"
           >
-            <FunnelIcon className="h-5 w-5 mr-2" />
-            {showMobileFilters ? 'Hide Filters' : 'Show Filters'}
+            <div className="w-6 h-6 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+              <FunnelIcon className="h-4 w-4 text-white" />
+            </div>
+            <span className="font-semibold text-gray-700 group-hover:text-primary-600 transition-colors">
+              {showMobileFilters ? 'Hide Filters' : 'Show Advanced Filters'}
+            </span>
           </button>
         </div>
 
@@ -267,32 +271,35 @@ const SearchResultsContent = () => {
             ) : (
               <>
                 {/* Results Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
 
-                {/* Pagination */}
+                {/* Enhanced Pagination */}
                 {totalPages > 1 && (
-                  <div className="mt-12 flex items-center justify-between">
-                    <div className="text-sm text-gray-700">
+                  <div className="mt-12 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div className="text-sm text-gray-700 text-center sm:text-left">
                       Showing page {currentPage} of {totalPages}
+                      <span className="block sm:inline sm:ml-2 text-gray-500">
+                        ({totalResults} total products)
+                      </span>
                     </div>
                     <div className="flex space-x-2">
                       <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-3 text-sm font-medium text-gray-500 bg-white/95 backdrop-blur-sm border-2 border-gray-200 rounded-xl hover:bg-gradient-to-r hover:from-primary-50/50 hover:to-accent-50/50 hover:text-primary-600 hover:border-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/20"
                       >
-                        Previous
+                        ← Previous
                       </button>
                       <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-3 text-sm font-medium text-gray-500 bg-white/95 backdrop-blur-sm border-2 border-gray-200 rounded-xl hover:bg-gradient-to-r hover:from-primary-50/50 hover:to-accent-50/50 hover:text-primary-600 hover:border-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/20"
                       >
-                        Next
+                        Next →
                       </button>
                     </div>
                   </div>

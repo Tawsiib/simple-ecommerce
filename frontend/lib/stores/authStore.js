@@ -2,6 +2,18 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { apiClient } from '../api';
 
+// Safe localStorage access for SSR
+const getStorage = () => {
+  if (typeof window !== 'undefined') {
+    return localStorage;
+  }
+  return {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+  };
+};
+
 const useAuthStore = create(
   persist(
     (set, get) => ({
@@ -98,13 +110,7 @@ const useAuthStore = create(
       // Logout
       logout: async () => {
         try {
-          if (get().token) {
-            await apiClient.post('/auth/logout');
-          }
-        } catch (error) {
-          console.error('Logout error:', error);
-        } finally {
-          // Clear state regardless of API call success
+          // Clear auth state
           set({
             user: null,
             token: null,
@@ -112,9 +118,23 @@ const useAuthStore = create(
             isLoading: false,
             error: null
           });
-          
-          // Clear token from API client
+
+          // Clear token in API client
           apiClient.clearAuthToken();
+          
+          return { success: true };
+        } catch (error) {
+          console.error('Logout error:', error);
+          // Even if there's an error, clear the local state
+          set({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            isLoading: false,
+            error: null
+          });
+          apiClient.clearAuthToken();
+          return { success: true };
         }
       },
 
@@ -130,7 +150,6 @@ const useAuthStore = create(
             
             set({
               user,
-              isAuthenticated: true,
               isLoading: false,
               error: null
             });
@@ -229,6 +248,29 @@ const useAuthStore = create(
     }),
     {
       name: 'auth-storage',
+      storage: {
+        getItem: (name) => {
+          try {
+            return getStorage().getItem(name);
+          } catch {
+            return null;
+          }
+        },
+        setItem: (name, value) => {
+          try {
+            getStorage().setItem(name, value);
+          } catch {
+            // Ignore storage errors
+          }
+        },
+        removeItem: (name) => {
+          try {
+            getStorage().removeItem(name);
+          } catch {
+            // Ignore storage errors
+          }
+        },
+      },
       partialize: (state) => ({ 
         user: state.user, 
         token: state.token, 

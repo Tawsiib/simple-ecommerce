@@ -1,10 +1,22 @@
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
+// Safe localStorage access for SSR
+const getStorage = () => {
+  if (typeof window !== 'undefined') {
+    return localStorage;
+  }
+  return {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+  };
+};
+
 // Create axios instance
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
-  timeout: 15000, // Increased timeout to 15 seconds
+  timeout: 10000, // Increased timeout to 15 seconds
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -55,9 +67,13 @@ if (typeof window !== 'undefined') {
 // Request interceptor - add auth token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    try {
+      const token = getStorage().getItem('auth_token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (error) {
+      // Ignore storage errors
     }
     return config;
   },
@@ -80,7 +96,7 @@ api.interceptors.response.use(
       
       try {
         // Try to refresh token
-        const refreshToken = localStorage.getItem('refresh_token');
+        const refreshToken = getStorage().getItem('refresh_token');
         if (refreshToken) {
           const response = await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/auth/refresh`,
@@ -88,7 +104,13 @@ api.interceptors.response.use(
           );
           
           const { access_token } = response.data;
-          localStorage.setItem('auth_token', access_token);
+          
+          // Update token in storage
+          try {
+            getStorage().setItem('auth_token', access_token);
+          } catch (storageError) {
+            // Ignore storage errors
+          }
           
           // Retry original request
           originalRequest.headers.Authorization = `Bearer ${access_token}`;
@@ -96,10 +118,17 @@ api.interceptors.response.use(
         }
       } catch (refreshError) {
         // Refresh failed, redirect to login
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user');
-        window.location.href = '/login';
+        try {
+          getStorage().removeItem('auth_token');
+          getStorage().removeItem('refresh_token');
+          getStorage().removeItem('user');
+        } catch (storageError) {
+          // Ignore storage errors
+        }
+        
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
         return Promise.reject(refreshError);
       }
     }
@@ -234,14 +263,22 @@ export const apiClient = {
   
   // Auth methods
   setAuthToken: (token) => {
-    if (token) {
+    try {
+      getStorage().setItem('auth_token', token);
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    } else {
-      delete api.defaults.headers.common['Authorization'];
+    } catch (error) {
+      // Ignore storage errors
     }
   },
   clearAuthToken: () => {
-    delete api.defaults.headers.common['Authorization'];
+    try {
+      getStorage().removeItem('auth_token');
+      getStorage().removeItem('refresh_token');
+      getStorage().removeItem('user');
+      delete api.defaults.headers.common['Authorization'];
+    } catch (error) {
+      // Ignore storage errors
+    }
   },
   login: (credentials) => api.post(endpoints.auth.login, credentials),
   register: (userData) => api.post(endpoints.auth.register, userData),

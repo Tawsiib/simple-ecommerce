@@ -9,7 +9,10 @@ import {
   AdjustmentsHorizontalIcon,
   CurrencyDollarIcon,
   TagIcon,
-  StarIcon
+  StarIcon,
+  ClockIcon,
+  FireIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline';
 import { apiClient } from '../../lib/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
@@ -230,11 +233,11 @@ const AdvancedSearch = ({ onSearch }) => {
 
   return (
     <div className="w-full">
-      {/* Search Bar */}
+      {/* Enhanced Search Bar */}
       <div className="relative">
         <form onSubmit={handleSearch} className="relative">
-          <div className="relative">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <div className="relative group">
+            <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               ref={searchInputRef}
               type="text"
@@ -242,36 +245,37 @@ const AdvancedSearch = ({ onSearch }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
               placeholder="Search for products, brands, categories..."
-              className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors"
+              className="w-full pl-12 pr-24 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-soft hover:shadow-medium"
             />
             {searchTerm && (
               <button
                 type="button"
                 onClick={clearSearch}
-                className="absolute right-16 top-1/2 transform -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600"
+                className="absolute right-20 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-all duration-300"
               >
                 <XMarkIcon className="h-4 w-4" />
               </button>
             )}
             <button
               type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-rose-600 text-white px-3 py-1.5 rounded-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-colors"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-2.5 rounded-xl hover:from-primary-600 hover:to-accent-600 focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-glow hover:shadow-glow-accent"
             >
               Search
             </button>
           </div>
         </form>
 
-        {/* Search Suggestions */}
+        {/* Enhanced Search Suggestions */}
         {showSuggestions && searchTerm && (
           <div
             ref={suggestionsRef}
-            className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto"
+            className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-large z-50 max-h-96 overflow-y-auto"
           >
             {/* Search History */}
             {searchHistory.length > 0 && (
-              <div className="p-3 border-b border-gray-100">
-                <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+              <div className="p-4 border-b border-gray-100/50">
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 flex items-center">
+                  <ClockIcon className="h-3 w-3 mr-2" />
                   Recent Searches
                 </h4>
                 <div className="space-y-1">
@@ -279,9 +283,9 @@ const AdvancedSearch = ({ onSearch }) => {
                     <button
                       key={index}
                       onClick={() => handleHistoryClick(term)}
-                      className="w-full text-left px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-50 rounded-md flex items-center"
+                      className="w-full text-left px-3 py-2.5 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-primary-50/50 hover:to-accent-50/50 rounded-xl flex items-center transition-all duration-300 group"
                     >
-                      <MagnifyingGlassIcon className="h-4 w-4 mr-2 text-gray-400" />
+                      <MagnifyingGlassIcon className="h-4 w-4 mr-3 text-gray-400 group-hover:text-primary-500 transition-colors" />
                       {term}
                     </button>
                   ))}
@@ -291,8 +295,9 @@ const AdvancedSearch = ({ onSearch }) => {
 
             {/* Popular Searches */}
             {popularSearches.length > 0 && (
-              <div className="p-3 border-b border-gray-100">
-                <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+              <div className="p-4">
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 flex items-center">
+                  <FireIcon className="h-3 w-3 mr-2" />
                   Popular Searches
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -300,7 +305,7 @@ const AdvancedSearch = ({ onSearch }) => {
                     <button
                       key={index}
                       onClick={() => handlePopularClick(term)}
-                      className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                      className="px-4 py-2 text-sm bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-full hover:from-primary-100 hover:to-accent-100 hover:text-primary-700 transition-all duration-300 font-medium hover:scale-105 transform"
                     >
                       {term}
                     </button>
@@ -312,16 +317,18 @@ const AdvancedSearch = ({ onSearch }) => {
         )}
       </div>
 
-      {/* Filter Toggle Button */}
-      <div className="mt-4 flex items-center justify-between">
+      {/* Enhanced Filter Toggle Button */}
+      <div className="mt-6 flex items-center justify-between">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-colors"
+          className="flex items-center space-x-3 px-6 py-3 border-2 border-gray-200 rounded-2xl hover:bg-gradient-to-r hover:from-primary-50/50 hover:to-accent-50/50 focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 group hover:scale-105 transform"
         >
-          <FunnelIcon className="h-5 w-5" />
-          <span>Filters</span>
+          <div className="w-5 h-5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <FunnelIcon className="h-3 w-3 text-white" />
+          </div>
+          <span className="font-medium text-gray-700 group-hover:text-primary-600 transition-colors">Advanced Filters</span>
           {activeFiltersCount > 0 && (
-            <span className="bg-rose-600 text-white text-xs px-2 py-1 rounded-full">
+            <span className="bg-gradient-to-r from-primary-500 to-accent-500 text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-glow">
               {activeFiltersCount}
             </span>
           )}
@@ -330,7 +337,7 @@ const AdvancedSearch = ({ onSearch }) => {
         {activeFiltersCount > 0 && (
           <button
             onClick={clearFilters}
-            className="text-sm text-gray-600 hover:text-gray-800 underline"
+            className="text-sm text-gray-600 hover:text-primary-600 underline font-medium hover:scale-105 transform transition-all duration-300"
           >
             Clear all filters
           </button>
@@ -339,17 +346,18 @@ const AdvancedSearch = ({ onSearch }) => {
 
       {/* Advanced Filters */}
       {isOpen && (
-        <div className="mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="mt-6 p-6 bg-white/95 backdrop-blur-sm border-2 border-gray-200/50 rounded-2xl shadow-medium">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Category Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                <TagIcon className="h-4 w-4 mr-2 text-primary-500" />
                 Category
               </label>
               <select
                 value={filters.category_id}
                 onChange={(e) => handleFilterChange('category_id', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
               >
                 <option value="">All Categories</option>
                 {categories.map((category) => (
@@ -362,13 +370,14 @@ const AdvancedSearch = ({ onSearch }) => {
 
             {/* Brand Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                <SparklesIcon className="h-4 w-4 mr-2 text-accent-500" />
                 Brand
               </label>
               <select
                 value={filters.brand_id}
                 onChange={(e) => handleFilterChange('brand_id', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
               >
                 <option value="">All Brands</option>
                 {brands.map((brand) => (
@@ -381,74 +390,78 @@ const AdvancedSearch = ({ onSearch }) => {
 
             {/* Price Range */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                <CurrencyDollarIcon className="h-4 w-4 mr-2 text-green-500" />
                 Price Range
               </label>
-              <div className="flex space-x-2">
+              <div className="flex space-x-3">
                 <input
                   type="number"
                   placeholder="Min"
                   value={filters.price_min}
                   onChange={(e) => handleFilterChange('price_min', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
                 />
-                <span className="text-gray-500 self-center">-</span>
+                <span className="text-gray-500 self-center font-medium">-</span>
                 <input
                   type="number"
                   placeholder="Max"
                   value={filters.price_max}
                   onChange={(e) => handleFilterChange('price_max', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
                 />
               </div>
             </div>
 
             {/* Rating Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                <StarIcon className="h-4 w-4 mr-2 text-yellow-500" />
                 Minimum Rating
               </label>
               <select
                 value={filters.rating}
                 onChange={(e) => handleFilterChange('rating', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
               >
                 <option value="">Any Rating</option>
-                <option value="4">4+ Stars</option>
-                <option value="3">3+ Stars</option>
-                <option value="2">2+ Stars</option>
-                <option value="1">1+ Stars</option>
+                <option value="4">4+ Stars ⭐⭐⭐⭐</option>
+                <option value="3">3+ Stars ⭐⭐⭐</option>
+                <option value="2">2+ Stars ⭐⭐</option>
+                <option value="1">1+ Stars ⭐</option>
               </select>
             </div>
 
             {/* Sort Options */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                <AdjustmentsHorizontalIcon className="h-4 w-4 mr-2 text-purple-500" />
                 Sort By
               </label>
               <select
                 value={filters.sort_by}
                 onChange={(e) => handleFilterChange('sort_by', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
               >
                 <option value="relevance">Relevance</option>
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="rating">Rating</option>
-                <option value="created_at">Newest</option>
-                <option value="popularity">Popularity</option>
+                <option value="name">Name (A-Z)</option>
+                <option value="price">Price (Low-High)</option>
+                <option value="rating">Rating (High-Low)</option>
+                <option value="created_at">Newest First</option>
+                <option value="popularity">Most Popular</option>
               </select>
             </div>
 
             {/* Sort Order */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                <AdjustmentsHorizontalIcon className="h-4 w-4 mr-2 text-indigo-500" />
                 Sort Order
               </label>
               <select
                 value={filters.sort_order}
                 onChange={(e) => handleFilterChange('sort_order', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-gray-300"
               >
                 <option value="desc">Descending</option>
                 <option value="asc">Ascending</option>
@@ -456,34 +469,40 @@ const AdvancedSearch = ({ onSearch }) => {
             </div>
           </div>
 
-          {/* Checkbox Filters */}
-          <div className="mt-6 flex flex-wrap gap-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={filters.in_stock}
-                onChange={(e) => handleFilterChange('in_stock', e.target.checked)}
-                className="h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300 rounded"
-              />
-              <span className="text-sm text-gray-700">In Stock Only</span>
+          {/* Enhanced Checkbox Filters */}
+          <div className="mt-8 flex flex-wrap gap-6">
+            <label className="flex items-center space-x-3 group cursor-pointer">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={filters.in_stock}
+                  onChange={(e) => handleFilterChange('in_stock', e.target.checked)}
+                  className="h-5 w-5 text-primary-600 focus:ring-4 focus:ring-primary-500/20 border-2 border-gray-300 rounded-lg transition-all duration-300"
+                />
+                <div className="absolute inset-0 rounded-lg ring-0 group-hover:ring-2 group-hover:ring-primary-500/20 transition-all duration-300"></div>
+              </div>
+              <span className="text-sm font-medium text-gray-700 group-hover:text-primary-600 transition-colors">In Stock Only</span>
             </label>
 
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={filters.featured}
-                onChange={(e) => handleFilterChange('featured', e.target.checked)}
-                className="h-4 w-4 text-rose-600 focus:ring-rose-500 border-gray-300 rounded"
-              />
-              <span className="text-sm text-gray-700">Featured Products</span>
+            <label className="flex items-center space-x-3 group cursor-pointer">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={filters.featured}
+                  onChange={(e) => handleFilterChange('featured', e.target.checked)}
+                  className="h-5 w-5 text-accent-600 focus:ring-4 focus:ring-accent-500/20 border-2 border-gray-300 rounded-lg transition-all duration-300"
+                />
+                <div className="absolute inset-0 rounded-lg ring-0 group-hover:ring-2 group-hover:ring-accent-500/20 transition-all duration-300"></div>
+              </div>
+              <span className="text-sm font-medium text-gray-700 group-hover:text-accent-600 transition-colors">Featured Products</span>
             </label>
           </div>
 
-          {/* Apply Filters Button */}
-          <div className="mt-6 flex justify-end">
+          {/* Enhanced Apply Filters Button */}
+          <div className="mt-8 flex justify-end">
             <button
               onClick={performSearch}
-              className="px-6 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-colors"
+              className="px-8 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-2xl hover:from-primary-600 hover:to-accent-600 focus:outline-none focus:ring-4 focus:ring-primary-500/20 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-glow hover:shadow-glow-accent font-semibold"
             >
               Apply Filters
             </button>

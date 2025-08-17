@@ -23,6 +23,7 @@ class User extends Authenticatable
         'is_active',
         'email_verified_at',
         'role',
+        'is_admin',
         'marketing_emails',
         'newsletter_subscription',
         'last_login_at',
@@ -38,6 +39,7 @@ class User extends Authenticatable
         'password' => 'hashed',
         'date_of_birth' => 'date',
         'is_active' => 'boolean',
+        'is_admin' => 'boolean',
         'marketing_emails' => 'boolean',
         'newsletter_subscription' => 'boolean',
         'last_login_at' => 'datetime',
@@ -93,7 +95,7 @@ class User extends Authenticatable
 
     public function getIsAdminAttribute(): bool
     {
-        return $this->role === 'admin';
+        return $this->is_admin || $this->role === 'admin';
     }
 
     // Scopes

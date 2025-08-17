@@ -7,7 +7,140 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '475px',
+      },
       colors: {
+        // Enhanced Dark Theme Color System
+        dark: {
+          // Primary dark backgrounds
+          bg: {
+            primary: '#0a0a0a',      // Main background
+            secondary: '#111111',     // Secondary background
+            tertiary: '#1a1a1a',     // Tertiary background
+            elevated: '#222222',      // Elevated surfaces
+            card: '#1c1c1c',         // Card backgrounds
+            modal: '#1e1e1e',        // Modal backgrounds
+            sidebar: '#161616',       // Sidebar backgrounds
+            navbar: '#1f1f1f',       // Navigation backgrounds
+            footer: '#0f0f0f',       // Footer backgrounds
+          },
+          // Dark text colors
+          text: {
+            primary: '#ffffff',       // Primary text
+            secondary: '#e5e5e5',     // Secondary text
+            tertiary: '#a3a3a3',      // Tertiary text
+            muted: '#737373',         // Muted text
+            disabled: '#525252',      // Disabled text
+            inverse: '#0a0a0a',       // Inverse text (on light backgrounds)
+          },
+          // Dark border colors
+          border: {
+            primary: '#333333',       // Primary borders
+            secondary: '#404040',     // Secondary borders
+            tertiary: '#525252',      // Tertiary borders
+            subtle: '#262626',        // Subtle borders
+            accent: '#404040',        // Accent borders
+            divider: '#2a2a2a',       // Divider lines
+          },
+          // Dark surface colors
+          surface: {
+            primary: '#1a1a1a',      // Primary surfaces
+            secondary: '#222222',     // Secondary surfaces
+            tertiary: '#2a2a2a',     // Tertiary surfaces
+            elevated: '#2d2d2d',     // Elevated surfaces
+            hover: '#333333',         // Hover states
+            active: '#404040',        // Active states
+            selected: '#3a3a3a',      // Selected states
+          },
+          // Dark accent colors
+          accent: {
+            primary: '#6366f1',       // Primary accent (indigo)
+            secondary: '#8b5cf6',     // Secondary accent (violet)
+            tertiary: '#ec4899',      // Tertiary accent (pink)
+            success: '#10b981',       // Success accent (emerald)
+            warning: '#f59e0b',       // Warning accent (amber)
+            error: '#ef4444',         // Error accent (red)
+            info: '#3b82f6',          // Info accent (blue)
+          },
+          // Dark gradient colors
+          gradient: {
+            primary: {
+              from: '#1e1b4b',       // Dark indigo
+              via: '#3730a3',         // Dark violet
+              to: '#581c87',          // Dark purple
+            },
+            secondary: {
+              from: '#0f172a',        // Dark slate
+              via: '#1e293b',         // Dark blue
+              to: '#1e3a8a',          // Dark blue
+            },
+            accent: {
+              from: '#4a044e',        // Dark pink
+              via: '#701a75',         // Dark magenta
+              to: '#86198f',          // Dark violet
+            },
+            sunset: {
+              from: '#1e1b4b',        // Dark indigo
+              via: '#3730a3',         // Dark violet
+              to: '#581c87',          // Dark purple
+            },
+            ocean: {
+              from: '#0f172a',        // Dark slate
+              via: '#1e293b',         // Dark blue
+              to: '#1e3a8a',          // Dark blue
+            },
+            forest: {
+              from: '#052e16',        // Dark green
+              via: '#14532d',         // Dark emerald
+              to: '#166534',          // Dark green
+            },
+            fire: {
+              from: '#450a0a',        // Dark red
+              via: '#7f1d1d',         // Dark red
+              to: '#991b1b',          // Dark red
+            },
+          },
+        },
+        // Enhanced light theme colors for consistency
+        light: {
+          bg: {
+            primary: '#ffffff',
+            secondary: '#fafafa',
+            tertiary: '#f5f5f5',
+            elevated: '#ffffff',
+            card: '#ffffff',
+            modal: '#ffffff',
+            sidebar: '#f8fafc',
+            navbar: '#ffffff',
+            footer: '#f8fafc',
+          },
+          text: {
+            primary: '#171717',
+            secondary: '#404040',
+            tertiary: '#737373',
+            muted: '#a3a3a3',
+            disabled: '#d4d4d4',
+            inverse: '#ffffff',
+          },
+          border: {
+            primary: '#e5e5e5',
+            secondary: '#d4d4d4',
+            tertiary: '#a3a3a3',
+            subtle: '#f5f5f5',
+            accent: '#d4d4d4',
+            divider: '#e5e5e5',
+          },
+          surface: {
+            primary: '#ffffff',
+            secondary: '#fafafa',
+            tertiary: '#f5f5f5',
+            elevated: '#ffffff',
+            hover: '#f8fafc',
+            active: '#f1f5f9',
+            selected: '#eff6ff',
+          },
+        },
         primary: {
           50: '#fef7ee',
           100: '#fdedd6',
@@ -368,6 +501,15 @@ module.exports = {
         'glow-accent': '0 0 20px rgba(217, 70, 239, 0.3)',
         'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
         'inner-medium': 'inset 0 4px 8px 0 rgba(0, 0, 0, 0.1)',
+        // Dark theme specific shadows
+        'dark-soft': '0 2px 15px -3px rgba(0, 0, 0, 0.3), 0 10px 20px -2px rgba(0, 0, 0, 0.2)',
+        'dark-medium': '0 4px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 30px -5px rgba(0, 0, 0, 0.3)',
+        'dark-large': '0 10px 40px -10px rgba(0, 0, 0, 0.5), 0 20px 50px -10px rgba(0, 0, 0, 0.4)',
+        'dark-glow': '0 0 20px rgba(99, 102, 241, 0.4)',
+        'dark-glow-accent': '0 0 20px rgba(139, 92, 246, 0.4)',
+        'dark-glow-success': '0 0 20px rgba(16, 185, 129, 0.4)',
+        'dark-glow-warning': '0 0 20px rgba(245, 158, 11, 0.4)',
+        'dark-glow-error': '0 0 20px rgba(239, 68, 68, 0.4)',
       },
       borderRadius: {
         '4xl': '2rem',
@@ -381,6 +523,18 @@ module.exports = {
         'gradient-ocean': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         'gradient-forest': 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
         'gradient-fire': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+        // Dark theme specific gradients
+        'dark-gradient-primary': 'linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #581c87 100%)',
+        'dark-gradient-secondary': 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%)',
+        'dark-gradient-accent': 'linear-gradient(135deg, #4a044e 0%, #701a75 50%, #86198f 100%)',
+        'dark-gradient-sunset': 'linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #581c87 100%)',
+        'dark-gradient-ocean': 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%)',
+        'dark-gradient-forest': 'linear-gradient(135deg, #052e16 0%, #14532d 50%, #166534 100%)',
+        'dark-gradient-fire': 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #991b1b 100%)',
+        // Dark theme patterns
+        'dark-pattern-dots': 'radial-gradient(circle, #333333 1px, transparent 1px)',
+        'dark-pattern-grid': 'linear-gradient(#333333 1px, transparent 1px), linear-gradient(90deg, #333333 1px, transparent 1px)',
+        'dark-pattern-waves': 'repeating-linear-gradient(45deg, #333333 0, #333333 1px, transparent 0, transparent 50%)',
       },
       transitionProperty: {
         'height': 'height',

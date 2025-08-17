@@ -499,6 +499,8 @@ class UserController extends Controller
             'marketing_emails' => $user->marketing_emails,
             'newsletter_subscription' => $user->newsletter_subscription,
             'last_login_at' => $user->last_login_at,
+            'is_admin' => $user->is_admin,
+            'role' => $user->role,
             'created_at' => $user->created_at,
             'updated_at' => $user->updated_at,
         ];

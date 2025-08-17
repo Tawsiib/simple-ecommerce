@@ -246,15 +246,7 @@ export default function Footer() {
             </div>
             
             <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-8 text-sm text-gray-400 text-center">
-              <div className="flex items-center space-x-2">
-                <span>Powered by</span>
-                <div className="flex space-x-2">
-                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs font-medium">Next.js</span>
-                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs font-medium">Laravel</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
                 <span>Build with</span>
                 <HeartIcon className="w-4 h-4 text-red-500 animate-pulse" />
                 <Link 
@@ -265,6 +257,16 @@ export default function Footer() {
                   Asib
                 </Link>
               </div>
+              
+              <div className="flex items-center space-x-2">
+                <span>Powered by</span>
+                <div className="flex space-x-2">
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs font-medium">Next.js</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs font-medium">Laravel</span>
+                </div>
+              </div>
+              
+              
             </div>
           </div>
         </div>
