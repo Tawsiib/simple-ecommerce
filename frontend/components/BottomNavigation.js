@@ -69,7 +69,7 @@ export default function BottomNavigation() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
       {/* Background with backdrop blur */}
-      <div className="bg-white/95 backdrop-blur-xl border-t border-gray-200/60 shadow-2xl">
+      <div className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border-t border-slate-200/60 dark:border-slate-700/60 shadow-2xl">
         <nav className="flex items-center justify-around py-3 px-2">
           {navigation.map((item) => {
             const isActive = pathname === item.href || 
@@ -83,8 +83,8 @@ export default function BottomNavigation() {
                 href={item.href}
                 className={`flex flex-col items-center justify-center py-2 px-3 rounded-2xl transition-all duration-300 group relative ${
                   isActive 
-                    ? 'text-purple-600 bg-gradient-to-br from-purple-50 to-pink-50 shadow-glow' 
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50/30'
+                    ? 'text-purple-600 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/50 dark:to-pink-900/50 shadow-glow' 
+                    : 'text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50/30 dark:hover:bg-slate-700/30'
                 }`}
                 title={item.description}
               >

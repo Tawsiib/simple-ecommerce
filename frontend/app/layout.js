@@ -50,10 +50,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="bg-slate-50 dark:bg-slate-950">
+      <body className={`${inter.className} bg-slate-50 dark:bg-slate-950 transition-colors duration-300`}>
         <Providers>
-          <ClientOnly fallback={<div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-950" />}>
+          <ClientOnly fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950" />}>
             <ThemeProvider>
               <AuthProvider>
                 {children}
@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
             toastOptions={{
               duration: 4000,
               style: {
-                background: '#363636',
+                background: '#1e293b',
                 color: '#fff',
               },
               success: {

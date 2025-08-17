@@ -56,7 +56,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-slate-500/75 dark:bg-slate-900/75 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -72,17 +72,17 @@ const CartDrawer = ({ isOpen, onClose }) => {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-white dark:bg-slate-800 shadow-xl">
                     {/* Header */}
                     <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">
+                        <Dialog.Title className="text-lg font-medium text-slate-900 dark:text-white">
                           Shopping Cart
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            className="relative -m-2 p-2 text-gray-400 hover:text-gray-500 transition-colors"
+                            className="relative -m-2 p-2 text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 transition-colors"
                             onClick={onClose}
                           >
                             <span className="absolute -inset-0.5" />
@@ -100,9 +100,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
                           </div>
                         ) : items.length === 0 ? (
                           <div className="text-center py-12">
-                            <ShoppingBagIcon className="mx-auto h-12 w-12 text-gray-400" />
-                            <h3 className="mt-2 text-sm font-medium text-gray-900">Your cart is empty</h3>
-                            <p className="mt-1 text-sm text-gray-500">
+                            <ShoppingBagIcon className="mx-auto h-12 w-12 text-slate-400 dark:text-slate-500" />
+                            <h3 className="mt-2 text-sm font-medium text-slate-900 dark:text-white">Your cart is empty</h3>
+                            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                               Start shopping to add items to your cart
                             </p>
                             <div className="mt-6">
@@ -117,10 +117,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
                           </div>
                         ) : (
                           <div className="flow-root">
-                            <ul className="-my-6 divide-y divide-gray-200">
+                            <ul className="-my-6 divide-y divide-slate-200 dark:divide-slate-700">
                               {items.map((item) => (
                                 <li key={item.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-slate-200 dark:border-slate-700">
                                     <img
                                       src={item.product?.images?.[0]?.url || '/placeholder-product.jpg'}
                                       alt={item.product?.name}
@@ -130,11 +130,11 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
                                   <div className="ml-4 flex flex-1 flex-col">
                                     <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                      <div className="flex justify-between text-base font-medium text-slate-900 dark:text-white">
                                         <h3>
                                           <Link 
                                             href={`/product/${item.product?.slug}`}
-                                            className="hover:text-rose-600 transition-colors"
+                                            className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
                                             onClick={onClose}
                                           >
                                             {item.product?.name}
@@ -142,7 +142,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                         </h3>
                                         <p className="ml-4">{item.formatted_subtotal}</p>
                                       </div>
-                                      <p className="mt-1 text-sm text-gray-500">
+                                      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                                         {item.product?.category?.name}
                                       </p>
                                     </div>
@@ -151,17 +151,17 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                         <button
                                           onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                                           disabled={item.quantity <= 1}
-                                          className="p-1 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                          className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                           <MinusIcon className="h-4 w-4" />
                                         </button>
-                                        <span className="text-gray-900 font-medium min-w-[2rem] text-center">
+                                        <span className="text-slate-900 dark:text-white font-medium min-w-[2rem] text-center">
                                           {item.quantity}
                                         </span>
                                         <button
                                           onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                                           disabled={item.quantity >= 99}
-                                          className="p-1 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                          className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                           <PlusIcon className="h-4 w-4" />
                                         </button>
@@ -170,7 +170,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                       <button
                                         type="button"
                                         onClick={() => handleRemoveItem(item.id)}
-                                        className="font-medium text-rose-600 hover:text-rose-500 transition-colors"
+                                        className="font-medium text-rose-600 dark:text-rose-400 hover:text-rose-500 dark:hover:text-rose-300 transition-colors"
                                       >
                                         <TrashIcon className="h-4 w-4" />
                                       </button>
@@ -186,12 +186,12 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
                     {/* Cart Summary */}
                     {items.length > 0 && (
-                      <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                        <div className="flex justify-between text-base font-medium text-gray-900">
+                      <div className="border-t border-slate-200 dark:border-slate-700 py-6 px-4 sm:px-6">
+                        <div className="flex justify-between text-base font-medium text-slate-900 dark:text-white">
                           <p>Subtotal</p>
                           <p>{summary.formattedSubtotal}</p>
                         </div>
-                        <p className="mt-0.5 text-sm text-gray-500">
+                        <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
                           Shipping and taxes calculated at checkout.
                         </p>
                         <div className="mt-6 space-y-3">

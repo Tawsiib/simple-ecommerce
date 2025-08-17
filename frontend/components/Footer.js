@@ -65,7 +65,7 @@ const trustFeatures = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 dark:from-slate-950 dark:via-purple-950 dark:to-indigo-950 text-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.03%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
       
@@ -84,7 +84,7 @@ export default function Footer() {
                 <h4 className="font-semibold text-sm mb-1 text-white group-hover:text-purple-300 transition-colors">
                   {feature.title}
                 </h4>
-                <p className="text-xs text-gray-300 group-hover:text-gray-200 transition-colors">
+                <p className="text-xs text-slate-300 dark:text-slate-300 group-hover:text-slate-200 dark:group-hover:text-slate-200 transition-colors">
                   {feature.description}
                 </p>
               </div>

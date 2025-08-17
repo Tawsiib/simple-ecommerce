@@ -79,13 +79,13 @@ export default function MobileNavigation({ isOpen, onClose }) {
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" />
+      <div className="fixed inset-0 bg-slate-900/50 dark:bg-slate-950/50 z-40 lg:hidden" />
       
       {/* Navigation Drawer */}
-      <div className="mobile-nav fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden">
+      <div className="mobile-nav fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-slate-800 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden">
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">SR</span>
@@ -94,7 +94,7 @@ export default function MobileNavigation({ isOpen, onClose }) {
             </div>
             <button
               onClick={onClose}
-              className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               aria-label="Close navigation"
             >
               <XMarkIcon className="w-6 h-6" />
@@ -102,7 +102,7 @@ export default function MobileNavigation({ isOpen, onClose }) {
           </div>
 
           {/* Search Bar */}
-          <div className="p-4 border-b border-gray-200">
+          <div className="p-4 border-b border-slate-200 dark:border-slate-700">
             <MobileSearchBar
               onSearch={handleSearch}
               placeholder="Search products..."
@@ -113,7 +113,7 @@ export default function MobileNavigation({ isOpen, onClose }) {
           {/* Navigation Links */}
           <nav className="flex-1 overflow-y-auto">
             <div className="p-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+              <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
                 Categories
               </h3>
               <div className="space-y-1">
@@ -122,23 +122,23 @@ export default function MobileNavigation({ isOpen, onClose }) {
                     key={item.name}
                     href={item.href}
                     onClick={handleNavClick}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                    className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group"
                   >
                     <div className="flex items-center space-x-3">
                       <span className="text-lg">{item.icon}</span>
-                      <span className="text-gray-700 group-hover:text-primary-600 font-medium">
+                      <span className="text-slate-700 dark:text-slate-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 font-medium">
                         {item.name}
                       </span>
                     </div>
-                    <ChevronRightIcon className="w-4 h-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
+                    <ChevronRightIcon className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
                   </Link>
                 ))}
               </div>
             </div>
 
             {/* User Menu */}
-            <div className="p-4 border-t border-gray-200">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+            <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+              <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
                 Account
               </h3>
               <div className="space-y-1">
@@ -147,19 +147,19 @@ export default function MobileNavigation({ isOpen, onClose }) {
                     key={item.name}
                     href={item.href}
                     onClick={handleNavClick}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                    className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group"
                   >
                     <div className="flex items-center space-x-3">
                       {typeof item.icon === 'string' ? (
                         <span className="text-lg">{item.icon}</span>
                       ) : (
-                        <item.icon className="w-5 h-5 text-gray-600" />
+                        <item.icon className="w-5 h-5 text-slate-600 dark:text-slate-400" />
                       )}
-                      <span className="text-gray-700 group-hover:text-primary-600 font-medium">
+                      <span className="text-slate-700 dark:text-slate-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 font-medium">
                         {item.name}
                       </span>
                     </div>
-                    <ChevronRightIcon className="w-4 h-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
+                    <ChevronRightIcon className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
                   </Link>
                 ))}
               </div>
@@ -167,27 +167,27 @@ export default function MobileNavigation({ isOpen, onClose }) {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-gray-200 bg-gray-50">
-            <div className="flex items-center justify-between text-sm text-gray-600">
+          <div className="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700">
+            <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-300">
               <div className="flex items-center space-x-4">
                 <Link
                   href="/login"
                   onClick={handleNavClick}
-                  className="text-primary-600 hover:text-primary-700 font-medium"
+                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
                 >
                   Log in
                 </Link>
                 <Link
                   href="/register"
                   onClick={handleNavClick}
-                  className="text-primary-600 hover:text-primary-700 font-medium"
+                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
                 >
                   Register
                 </Link>
               </div>
               <div className="flex items-center space-x-3">
                 <Link href="/wishlist" onClick={handleNavClick} className="relative">
-                  <HeartIcon className="w-5 h-5 text-gray-600" />
+                  <HeartIcon className="w-5 h-5 text-slate-600 dark:text-slate-400" />
                   {wishlistCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-accent-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                       {wishlistCount}
@@ -195,7 +195,7 @@ export default function MobileNavigation({ isOpen, onClose }) {
                   )}
                 </Link>
                 <Link href="/cart" onClick={handleNavClick} className="relative">
-                  <ShoppingCartIcon className="w-5 h-5 text-gray-600" />
+                  <ShoppingCartIcon className="w-5 h-5 text-slate-600 dark:text-slate-400" />
                   {cartItemCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                       {cartItemCount}

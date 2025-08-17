@@ -159,7 +159,7 @@ const ThemeToggle = ({ variant = 'default', size = 'md', className = '', showLab
                 </div>
                 <div className="flex-1">
                   <span className="font-medium">Dark</span>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Easy on the eyes</p>
+                  <p className="text-xs text-gray-500 dark:text-dark-text-tertiary">Easy on the eyes</p>
                 </div>
                 {theme === 'dark' && (
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
@@ -183,7 +183,7 @@ const ThemeToggle = ({ variant = 'default', size = 'md', className = '', showLab
                 </div>
                 <div className="flex-1">
                   <span className="font-medium">System</span>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Follows OS preference</p>
+                  <p className="text-xs text-gray-500 dark:text-dark-text-tertiary">Follows OS preference</p>
                 </div>
                 {theme === 'system' && (
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />

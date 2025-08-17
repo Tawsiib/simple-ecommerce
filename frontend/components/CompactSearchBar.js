@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { 
-  MagnifyingGlassIcon, 
   XMarkIcon, 
   TagIcon,
   FireIcon,
@@ -131,7 +130,7 @@ export function CompactSearchBar({
     switch (variant) {
       case 'mobile':
         return {
-          input: "w-full pl-12 pr-12 py-3 text-sm bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 hover:border-gray-300 shadow-soft",
+          input: "w-full pl-4 pr-12 py-3 text-sm bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 hover:border-gray-300 shadow-soft",
           icon: "w-6 h-6",
           iconSize: "h-4 w-4",
           clearButton: "w-6 h-6",
@@ -139,7 +138,7 @@ export function CompactSearchBar({
         };
       case 'enhanced':
         return {
-          input: "w-full pl-14 pr-14 py-4 text-base bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 hover:border-gray-300 shadow-soft hover:shadow-medium",
+          input: "w-full pl-4 pr-14 py-4 text-base bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300 hover:border-gray-300 shadow-soft hover:shadow-medium",
           icon: "w-8 h-8",
           iconSize: "h-5 w-5",
           clearButton: "w-8 h-8",
@@ -147,7 +146,7 @@ export function CompactSearchBar({
         };
       default: // compact
         return {
-          input: "w-full pl-14 pr-14 py-4 text-base bg-white/80 backdrop-blur-sm border-2 border-gray-200/50 rounded-2xl focus:ring-4 focus:ring-violet-500/20 focus:border-violet-500 transition-all duration-300 hover:border-purple-300 shadow-soft hover:shadow-medium focus:shadow-glow",
+          input: "w-full pl-4 pr-14 py-4 text-base bg-white/80 backdrop-blur-sm border-2 border-gray-200/50 rounded-2xl focus:ring-4 focus:ring-violet-500/20 focus:border-violet-500 transition-all duration-300 hover:border-purple-300 shadow-soft hover:shadow-medium focus:shadow-glow",
           icon: "w-8 h-8",
           iconSize: "h-5 w-5",
           clearButton: "w-8 h-8",
@@ -184,25 +183,24 @@ export function CompactSearchBar({
             }}
             onFocus={() => setIsOpen(true)}
             placeholder={placeholder}
-            className={styles.input}
+            className={`${styles.input} [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden`}
+            style={{ 
+              backgroundImage: 'none',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'left center',
+              backgroundSize: 'auto'
+            }}
           />
           
-          {/* Enhanced Search Icon */}
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <div className={`${styles.icon} bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-600 rounded-xl flex items-center justify-center shadow-glow group-hover:shadow-glow-accent transition-all duration-300 transform group-hover:scale-110`}>
-              <MagnifyingGlassIcon className={`${styles.iconSize} text-white`} />
-            </div>
-          </div>
-
-          {/* Category Toggle Button */}
+          {/* Category Toggle Button - More Subtle Design */}
           {showQuickCategories && (
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
               className="absolute inset-y-0 right-0 pr-4 flex items-center group/category"
             >
-              <div className={`${styles.icon} bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center transition-all duration-300 group-hover/category:scale-110 shadow-glow`}>
-                <TagIcon className={`${styles.iconSize} text-white`} />
+              <div className="w-8 h-8 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg flex items-center justify-center transition-all duration-300 group-hover/category:scale-110 border border-slate-200 dark:border-slate-600">
+                <TagIcon className="h-4 w-4 text-slate-600 dark:text-slate-400 group-hover/category:text-purple-600 dark:group-hover/category:text-purple-400" />
               </div>
             </button>
           )}
@@ -252,7 +250,6 @@ export function CompactSearchBar({
                       onClick={() => handleHistoryClick(term)}
                       className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-primary-50/50 hover:to-accent-50/50 rounded-lg flex items-center transition-all duration-300 group"
                     >
-                      <MagnifyingGlassIcon className="h-4 w-4 mr-3 text-gray-400 group-hover:text-primary-500 transition-colors" />
                       {term}
                     </button>
                   ))}

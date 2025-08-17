@@ -169,11 +169,11 @@ const Header = () => {
         {/* Main Header with Glassmorphism */}
         <header className={`relative backdrop-blur-xl transition-all duration-500 ${
           isScrolled 
-            ? 'bg-white/80 dark:bg-dark-bg-navbar/90 shadow-2xl border-b border-white/20 dark:border-dark-border-primary/30' 
-            : 'bg-white/60 dark:bg-dark-bg-navbar/80 shadow-lg'
+            ? 'bg-white/80 dark:bg-slate-800/90 shadow-2xl border-b border-white/20 dark:border-slate-700/30' 
+            : 'bg-white/60 dark:bg-slate-800/80 shadow-lg'
         }`}>
           {/* Subtle Background Pattern */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-50/50 via-pink-50/50 to-blue-50/50 dark:from-dark-gradient-primary dark:via-dark-gradient-secondary dark:to-dark-gradient-accent opacity-30 dark:opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-50/50 via-pink-50/50 to-blue-50/50 dark:from-slate-900/50 dark:via-purple-950/50 dark:to-indigo-950/50 opacity-30 dark:opacity-20"></div>
           
           <div className="container-custom relative z-10 py-2.5 sm:py-3 md:py-4">
             <div className="flex items-center justify-between">
@@ -218,7 +218,7 @@ const Header = () => {
               {/* Right Side Actions with Enhanced Design */}
               <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
                 {/* Theme Showcase Link */}
-                <Link href="/theme-showcase" className="hidden md:flex relative p-3 text-gray-600 dark:text-dark-text-secondary hover:text-purple-600 dark:hover:text-dark-accent-primary transition-all duration-300 group">
+                <Link href="/theme-showcase" className="hidden md:flex relative p-3 text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 group">
                   <div className="relative">
                     <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                       <span className="text-white text-xs font-bold">T</span>
@@ -228,7 +228,7 @@ const Header = () => {
                 </Link>
                 
                 {/* Wishlist with Hover Effects */}
-                <Link href="/wishlist" className="hidden md:flex relative p-3 text-gray-600 dark:text-dark-text-secondary hover:text-purple-600 dark:hover:text-dark-accent-secondary transition-all duration-300 group">
+                <Link href="/wishlist" className="hidden md:flex relative p-3 text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 group">
                   <div className="relative">
                     <HeartIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
                     <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
@@ -244,7 +244,7 @@ const Header = () => {
                 <div className="hidden md:block relative" ref={userMenuRef}>
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center space-x-3 p-3 text-gray-600 dark:text-dark-text-secondary hover:text-purple-600 dark:hover:text-dark-accent-primary transition-all duration-300 group rounded-2xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:bg-dark-surface-hover"
+                    className="flex items-center space-x-3 p-3 text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 group rounded-2xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:bg-slate-700"
                   >
                     <div className="relative">
                       <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-glow group-hover:shadow-glow-accent transition-all duration-300 transform group-hover:scale-110">
@@ -267,7 +267,7 @@ const Header = () => {
 
                   {/* Enhanced User Dropdown Menu */}
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 top-full mt-3 w-72 bg-white/90 dark:bg-dark-bg-modal/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 dark:border-dark-border-primary/30 z-50 animate-fade-in-down">
+                    <div className="absolute right-0 top-full mt-3 w-72 bg-white/90 dark:bg-slate-800/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 dark:border-slate-700/30 z-50 animate-fade-in-down">
                       <div className="p-6">
                         {isAuthenticated ? (
                           <div className="space-y-4">
@@ -284,8 +284,8 @@ const Header = () => {
                                 )}
                               </div>
                               <div>
-                                <p className="font-bold text-gray-900 dark:text-dark-text-primary text-lg">{user?.name || 'User'}</p>
-                                <p className="text-sm text-gray-500 dark:text-dark-text-tertiary">{user?.email || 'user@example.com'}</p>
+                                <p className="font-bold text-slate-900 dark:text-white text-lg">{user?.name || 'User'}</p>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">{user?.email || 'user@example.com'}</p>
                               </div>
                             </div>
                             <div className="space-y-2">

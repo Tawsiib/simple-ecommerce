@@ -4,7 +4,9 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './contexts/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
@@ -550,4 +552,21 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'dark',
+    'light',
+    'dark:bg-gray-800',
+    'dark:bg-gray-900',
+    'dark:text-white',
+    'dark:text-gray-100',
+    'dark:text-gray-200',
+    'dark:text-gray-300',
+    'dark:text-gray-400',
+    'dark:border-gray-600',
+    'dark:border-gray-700',
+    'dark:border-gray-800',
+    'dark:shadow-soft',
+    'dark:shadow-medium',
+    'dark:shadow-large'
+  ]
 };

@@ -64,13 +64,13 @@ export default function Categories() {
 
   if (isLoading) {
     return (
-      <section className="py-12 sm:py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-slate-50 dark:bg-slate-900">
         <div className="container-custom">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               Trending Categories
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto px-4 sm:px-0">
               Discover our most popular beauty and skincare categories, carefully curated for your daily routine
             </p>
           </div>
@@ -86,13 +86,13 @@ export default function Categories() {
 
   if (error) {
     return (
-      <section className="py-12 sm:py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-slate-50 dark:bg-slate-900">
         <div className="container-custom">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               Trending Categories
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto px-4 sm:px-0">
               Discover our most popular beauty and skincare categories, carefully curated for your daily routine
             </p>
           </div>
@@ -103,9 +103,9 @@ export default function Categories() {
   }
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-purple-50/30 relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-purple-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-purple-950/30 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23a855f7%22%20fill-opacity%3D%220.02%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23a855f7%22%20fill-opacity%3D%220.02%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30 dark:opacity-10"></div>
       
       {/* Floating Elements */}
       <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-float"></div>
@@ -114,20 +114,20 @@ export default function Categories() {
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full mb-6 animate-fade-in-up">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 px-4 py-2 rounded-full mb-6 animate-fade-in-up">
             <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-semibold text-purple-700">Popular Categories</span>
+            <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">Popular Categories</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             Trending Categories
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4 sm:px-0 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             Discover our most popular beauty and skincare categories, carefully curated for your daily routine
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
           {displayCategories.map((category, index) => {
             // Handle both API data and fallback data
             const categoryData = category.icon ? category : {
@@ -146,11 +146,11 @@ export default function Categories() {
               >
                 <Link
                   href={categoryData.href}
-                  className="group block"
+                  className="group block h-full"
                 >
-                  <div className="card overflow-hidden group-hover:shadow-lg transition-all duration-500 transform group-hover:-translate-y-2 hover:shadow-glow">
+                  <div className="card overflow-hidden group-hover:shadow-lg transition-all duration-500 transform group-hover:-translate-y-2 hover:shadow-glow h-full flex flex-col">
                     {/* Category Image */}
-                    <div className="relative h-48 sm:h-56 overflow-hidden">
+                    <div className="relative h-48 sm:h-56 overflow-hidden flex-shrink-0">
                       <div 
                         className="absolute inset-0 bg-cover bg-center bg-no-repeat group-hover:scale-110 transition-transform duration-700"
                         style={{ backgroundImage: `url(${categoryData.image})` }}
@@ -169,15 +169,15 @@ export default function Categories() {
                     </div>
 
                     {/* Category Info */}
-                    <div className="p-6">
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
                         {categoryData.name}
                       </h3>
-                      <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                      <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed flex-1">
                         {categoryData.description}
                       </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-purple-600 font-semibold group-hover:text-purple-700 transition-colors duration-300 text-sm">
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-purple-600 dark:text-purple-400 font-semibold group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors duration-300 text-sm">
                           Explore Category
                         </span>
                         <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
